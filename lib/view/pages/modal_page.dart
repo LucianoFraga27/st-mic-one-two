@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/pages/home_page.dart';
+import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/app_bar.dart';
 
 class ModalPage extends StatefulWidget {
@@ -9,6 +11,8 @@ class ModalPage extends StatefulWidget {
 }
 
 class _ModalPageState extends State<ModalPage> {
+  ThemeColors themeColors = ThemeColors();
+
   void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -21,8 +25,15 @@ class _ModalPageState extends State<ModalPage> {
       appBar: customAppBar(context),
       body: _home(),
       bottomNavigationBar: _customButtonNavigationBar(),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            gradient: themeColors.gradient),
+        child: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
+            backgroundColor: Colors.transparent),
+      ),
     );
   }
 
@@ -36,6 +47,10 @@ class _ModalPageState extends State<ModalPage> {
         BottomNavigationBarItem(
           icon: Icon(Icons.play_circle_sharp),
           label: 'Musicas',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Pesquisar',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.my_library_add_outlined),
@@ -56,28 +71,23 @@ class _ModalPageState extends State<ModalPage> {
 }
 
 int _selectedIndex = 0;
-const TextStyle optionStyle =
-    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-const List<Widget> _widgetOptions = <Widget>[
-  Text(
-    'Index 0: Home',
-    style: optionStyle,
-  ),
+const List<Widget> _pages = <Widget>[
+  HomePage(),
   Text(
     'Index 1: Business',
-    style: optionStyle,
   ),
   Text(
     'Index 2: School',
-    style: optionStyle,
   ),
   Text(
     'Index 3: Settings',
-    style: optionStyle,
+  ),
+  Text(
+    'Index 4: Settings',
   ),
 ];
 
 Widget _home() {
-  return _widgetOptions.elementAt(_selectedIndex);
+  return _pages.elementAt(_selectedIndex);
 }

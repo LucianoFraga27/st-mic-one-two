@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/pages/modal_page.dart';
-import 'package:mic_check_one_two/view/pages/test_page.dart';
 
 void main() {
   runApp(const MyApp());
