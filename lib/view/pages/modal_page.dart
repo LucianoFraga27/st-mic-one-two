@@ -31,8 +31,8 @@ class _ModalPageState extends State<ModalPage> {
             gradient: themeColors.gradient),
         child: FloatingActionButton(
             onPressed: () {},
-            child: Icon(Icons.add),
-            backgroundColor: Colors.transparent),
+            backgroundColor: Colors.transparent,
+            child: Icon(Icons.add)),
       ),
     );
   }
