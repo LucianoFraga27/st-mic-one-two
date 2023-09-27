@@ -64,20 +64,11 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                   height: MediaQuery.of(context).size.height / 5,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2), // Cor da sombra
-                          spreadRadius: 1, // Raio de propagação da sombra
-                          blurRadius: 10, // Raio de desfoque da sombra
-                          offset: const Offset(0,
-                              1), // Deslocamento da sombra (horizontal, vertical)
-                        ),
-                      ],
-                      gradient: themeColors.gradient),
+                      color: Colors.transparent),
                   child: Stack(
                     children: [
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
@@ -85,7 +76,8 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(
+                                    top: 2.0, right: 2.0, left: 2),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -94,10 +86,10 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                         color: Colors.black
                                             .withOpacity(0.2), // Cor da sombra
                                         spreadRadius:
-                                            3, // Raio de propagação da sombra
+                                            2, // Raio de propagação da sombra
                                         blurRadius:
                                             4, // Raio de desfoque da sombra
-                                        offset: const Offset(0,
+                                        offset: const Offset(3,
                                             3), // Deslocamento da sombra (horizontal, vertical)
                                       ),
                                     ],
@@ -111,13 +103,14 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                   ),
                                 )),
                           ),
+                          SizedBox(height: 5),
                           RichText(
                             text: const TextSpan(
                               children: [
                                 TextSpan(
                                   text: "2P - ",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.black, // Cor do "2P"
                                   ),
@@ -125,15 +118,14 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                 TextSpan(
                                   text: "De Manhã",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black, // Cor do texto
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(width: 10),
+                          )
                         ],
                       ),
                     ],
