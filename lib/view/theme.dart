@@ -20,4 +20,14 @@ class ThemeColors {
       Colors.grey[500]!
     ], // Cores do gradiente
   );
+
+  var gradient3 = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Colors.grey[700]!,
+      Colors.grey[500]!,
+      Colors.grey[400]!
+    ], // Cores do gradiente
+  );
 }

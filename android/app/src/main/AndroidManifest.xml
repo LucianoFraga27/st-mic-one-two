@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="mic_check_one_two"
+        android:label="OneTwo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/widgets/curtidas_widget.dart';
 import 'package:mic_check_one_two/view/widgets/destaque_widget.dart';
+import 'package:mic_check_one_two/view/widgets/opcoes_widget.dart';
 import 'package:mic_check_one_two/view/widgets/recomendados_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,12 +23,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             Column(
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
+                OpcoesWidget(),
+                const SizedBox(height: 20),
                 DestaqueWidget(),
                 const SizedBox(height: 20),
                 RecomendadosWidget(),
                 const SizedBox(height: 0),
-                CurtidasWidget(),
+                // CurtidasWidget(),
                 const SizedBox(height: 30),
                 //const SizedBox(height: 20),
                 // DestaqueWidget(),
