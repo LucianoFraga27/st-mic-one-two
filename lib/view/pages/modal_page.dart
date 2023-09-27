@@ -28,11 +28,14 @@ class _ModalPageState extends State<ModalPage> {
       floatingActionButton: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            gradient: themeColors.gradient),
+            gradient: themeColors.gradient2),
         child: FloatingActionButton(
             onPressed: () {},
             backgroundColor: Colors.transparent,
-            child: Icon(Icons.add)),
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            )),
       ),
     );
   }

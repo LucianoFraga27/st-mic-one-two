@@ -50,7 +50,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
 
   Widget _recomendadoWidget(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                   ),
                                 )),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           RichText(
                             text: const TextSpan(
                               children: [
