@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 
-class DestaqueWidget extends StatelessWidget {
+class DestaqueWidget extends StatefulWidget {
   DestaqueWidget({super.key});
 
+  @override
+  State<DestaqueWidget> createState() => _DestaqueWidgetState();
+}
+
+class _DestaqueWidgetState extends State<DestaqueWidget> {
   ThemeColors themeColors = ThemeColors();
+
+  Color corFavorite = Colors.white;
+  bool favorito = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,19 +60,32 @@ class DestaqueWidget extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {},
-                            child: const Icon(
-                              Icons
-                                  .play_circle_outline_rounded, // Ícone no canto inferior direito
-                              color: Colors.white,
-                              size: 26,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons
+                                    .play_circle_outline_rounded, // Ícone no canto inferior direito
+                                color: Colors.white,
+                                size: 26,
+                              ),
                             ),
                           ),
                           const SizedBox(width: 15),
-                          InkWell(
-                            onTap: () {},
-                            child: const Icon(
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (favorito == false) {
+                                  corFavorite = themeColors.favorite;
+                                  favorito = true;
+                                } else {
+                                  corFavorite = Colors.white;
+                                  favorito = false;
+                                }
+                              });
+                            },
+                            icon: Icon(
                               Icons.favorite, // Ícone no canto inferior direito
-                              color: Colors.white,
+                              color: corFavorite,
                               size: 24,
                             ),
                           ),

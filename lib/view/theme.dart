@@ -30,4 +30,6 @@ class ThemeColors {
       Colors.grey[400]!
     ], // Cores do gradiente
   );
+
+  var favorite = const Color.fromARGB(255, 156, 10, 0);
 }

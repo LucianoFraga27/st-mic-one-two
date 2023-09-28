@@ -1,8 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 
 class OpcoesWidget extends StatelessWidget {
   OpcoesWidget({super.key});
+
+  final Random random = Random();
+
+  int generateRandomNumber() {
+    return random.nextInt(10000);
+  }
+
   ThemeColors themeColors = ThemeColors();
   @override
   Widget build(BuildContext context) {
@@ -32,16 +41,26 @@ class OpcoesWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child: _cardEsquerda(context, Icons.favorite, "Curtidas"),
+          child: InkWell(
+              onTap: () {},
+              splashColor: Colors.black.withOpacity(0.2),
+              child: _cardEsquerda(context, Icons.favorite, "Curtidas")),
         ),
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child:
-              _cardEsquerda(context, Icons.view_compact_sharp, "Reproduções"),
+          child: InkWell(
+              onTap: () {},
+              splashColor: Colors.black.withOpacity(0.2),
+              child: _cardEsquerda(
+                  context, Icons.view_compact_sharp, "Reproduções")),
         ),
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child: _cardEsquerda(context, Icons.filter_list_alt, "Playlists"),
+          child: InkWell(
+              onTap: () {},
+              splashColor: Colors.black.withOpacity(0.2),
+              child:
+                  _cardEsquerda(context, Icons.filter_list_alt, "Playlists")),
         ),
       ],
     ));
@@ -87,18 +106,117 @@ class OpcoesWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child: _cardDireita(context, Icons.cloud_upload_outlined, "Upload"),
+          child: InkWell(
+              onTap: () {},
+              splashColor: Colors.black.withOpacity(0.2),
+              child: _cardEsquerda(
+                  context, Icons.cloud_upload_outlined, "Upload")),
         ),
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child: _cardDireita(context, Icons.person, "Meu Perfil"),
+          child: InkWell(
+              onTap: () {
+                _meuPerfil(context);
+              },
+              splashColor: Colors.black.withOpacity(0.2),
+              child: _cardEsquerda(context, Icons.person, "Meu Perfil")),
         ),
         Padding(
           padding: const EdgeInsets.all(3.0),
-          child: _cardDireita(context, Icons.settings, "Configuração"),
+          child: InkWell(
+              onTap: () {},
+              splashColor: Colors.black.withOpacity(0.2),
+              child: _cardEsquerda(context, Icons.settings, "Configuração")),
         ),
       ],
     ));
+  }
+
+  Future<dynamic> _meuPerfil(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage(
+                      'assets/meuperfil.png'), // Substitua pelo caminho da imagem do usuário
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Lucas Silva',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Faixas',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '${generateRandomNumber()}',
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Seguidores',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '${generateRandomNumber()}',
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Seguindo',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '${generateRandomNumber()}',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Fechar',
+                      style: TextStyle(color: Colors.grey)),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Container _cardDireita(BuildContext context, IconData icon, String value) {
