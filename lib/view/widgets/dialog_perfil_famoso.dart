@@ -100,13 +100,19 @@ dialogPerfilFamoso(
                     onPressed: () {
                       // Lógica para "Ver Perfil"
                     },
-                    child: Text('Ver Perfil'),
+                    child: Text(
+                      'Ver Perfil',
+                      style: TextStyle(color: Color.fromARGB(197, 0, 0, 0)),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       // Lógica para "Seguir"
                     },
-                    child: Text('Seguir'),
+                    child: Text(
+                      'Seguir',
+                      style: TextStyle(color: Color.fromARGB(197, 0, 0, 0)),
+                    ),
                   ),
                 ],
               ),

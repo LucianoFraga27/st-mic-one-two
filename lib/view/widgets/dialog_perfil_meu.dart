@@ -100,7 +100,10 @@ dialogPerfilMeu(
                     onPressed: () {
                       // Lógica para "Ver Perfil"
                     },
-                    child: Text('Ver Perfil'),
+                    child: Text(
+                      'Ver Perfil',
+                      style: TextStyle(color: Color.fromARGB(197, 0, 0, 0)),
+                    ),
                   ),
                 ],
               ),
