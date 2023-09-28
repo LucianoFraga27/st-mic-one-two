@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/theme.dart';
+import 'package:mic_check_one_two/view/widgets/dialog_perfil_meu.dart';
 
 class OpcoesWidget extends StatelessWidget {
   OpcoesWidget({super.key});
@@ -116,7 +117,7 @@ class OpcoesWidget extends StatelessWidget {
           padding: const EdgeInsets.all(3.0),
           child: InkWell(
               onTap: () {
-                _meuPerfil(context);
+                dialogPerfilMeu(context);
               },
               splashColor: Colors.black.withOpacity(0.2),
               child: _cardEsquerda(context, Icons.person, "Meu Perfil")),

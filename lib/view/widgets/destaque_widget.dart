@@ -1,5 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/theme.dart';
+import 'package:mic_check_one_two/view/widgets/dialog_perfil_famoso.dart';
+import 'package:mic_check_one_two/view/widgets/dialog_perfil_meu.dart';
+import 'package:mic_check_one_two/view/widgets/dialog_play_music.dart';
 
 class DestaqueWidget extends StatefulWidget {
   DestaqueWidget({super.key});
@@ -61,7 +66,9 @@ class _DestaqueWidgetState extends State<DestaqueWidget> {
                           InkWell(
                             onTap: () {},
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                dialogPlayMusic(context);
+                              },
                               icon: const Icon(
                                 Icons
                                     .play_circle_outline_rounded, // Ícone no canto inferior direito
@@ -128,19 +135,24 @@ class _DestaqueWidgetState extends State<DestaqueWidget> {
                               )),
                         ),
                         const SizedBox(width: 5),
-                        const Column(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "De Manhã",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w500),
                             ),
-                            Text(
-                              "2P",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w300),
+                            InkWell(
+                              onTap: () {
+                                dialogPerfilFamoso(context);
+                              },
+                              child: const Text(
+                                "2P",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w300),
+                              ),
                             )
                           ],
                         ),
