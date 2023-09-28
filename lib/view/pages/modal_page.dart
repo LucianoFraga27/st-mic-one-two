@@ -32,7 +32,7 @@ class _ModalPageState extends State<ModalPage> {
         child: FloatingActionButton(
             onPressed: () {},
             backgroundColor: Colors.transparent,
-            child: Icon(
+            child: const Icon(
               Icons.add,
               color: Colors.white,
             )),

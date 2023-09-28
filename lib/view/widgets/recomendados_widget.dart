@@ -31,11 +31,13 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
             ),
           ),
           Container(
-            height: 200, // Defina a altura desejada para a lista horizontal
+            height: MediaQuery.of(context).size.height / 4.5,
+            color: Colors
+                .transparent, // Defina a altura desejada para a lista horizontal
             child: ListView.separated(
               scrollDirection: Axis.horizontal, // Define o eixo horizontal
               itemBuilder: (BuildContext context, int index) {
-                return _recomendadoWidget(context);
+                return _recomendadoWidget(context, index);
               },
               itemCount: 10,
               separatorBuilder: (BuildContext context, int index) {
@@ -48,7 +50,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
     );
   }
 
-  Widget _recomendadoWidget(BuildContext context) {
+  Widget _recomendadoWidget(BuildContext context, int index) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
       child: Column(
@@ -60,7 +62,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
             child: Column(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width / 3,
+                  width: MediaQuery.of(context).size.width / 4,
                   height: MediaQuery.of(context).size.height / 5,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
@@ -71,6 +73,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Text("TOP #${index + 1}"),
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),

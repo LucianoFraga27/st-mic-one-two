@@ -7,14 +7,20 @@ class OpcoesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(0.0),
+      padding: const EdgeInsets.only(top: 0),
       child: Container(
         width: MediaQuery.of(context).size.width / 1,
         color: Colors.transparent,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [_esquerda(context), _direita(context)],
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const SizedBox(width: 1),
+            _esquerda(context),
+            const SizedBox(width: 10),
+            _direita(context),
+            const SizedBox(width: 1),
+          ],
         ),
       ),
     );
@@ -43,7 +49,7 @@ class OpcoesWidget extends StatelessWidget {
 
   Container _cardEsquerda(BuildContext context, IconData icon, String value) {
     return Container(
-        width: MediaQuery.of(context).size.width / 2.5,
+        width: MediaQuery.of(context).size.width / 2.3,
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
             gradient: themeColors.gradient3,
@@ -97,7 +103,7 @@ class OpcoesWidget extends StatelessWidget {
 
   Container _cardDireita(BuildContext context, IconData icon, String value) {
     return Container(
-        width: MediaQuery.of(context).size.width / 2.5,
+        width: MediaQuery.of(context).size.width / 2.3,
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
             gradient: themeColors.gradient3,
