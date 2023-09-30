@@ -59,10 +59,6 @@ class _ModalPageState extends State<ModalPage> {
           label: 'Pesquisar',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.my_library_add_outlined),
-          label: 'Minhas Musicas',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'Meu Perfil',
         ),
@@ -82,9 +78,6 @@ List<Widget> _pages = <Widget>[
   const HomePage(),
   MusicasPage(),
   PesquisaMusicaPage(),
-  Text(
-    'Index 3: Settings',
-  ),
   const MeuPerfilPage(),
 ];
 
