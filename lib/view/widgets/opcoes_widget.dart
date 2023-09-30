@@ -43,7 +43,9 @@ class OpcoesWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(3.0),
           child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/curtidas');
+              },
               splashColor: Colors.black.withOpacity(0.2),
               child: _cardEsquerda(context, Icons.favorite, "Curtidas")),
         ),
@@ -120,7 +122,7 @@ class OpcoesWidget extends StatelessWidget {
                 dialogPerfilMeu(context);
               },
               splashColor: Colors.black.withOpacity(0.2),
-              child: _cardEsquerda(context, Icons.person, "Meu Perfil")),
+              child: _cardEsquerda(context, Icons.person, "Perfil")),
         ),
         Padding(
           padding: const EdgeInsets.all(3.0),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/theme.dart';
+
+ThemeColors themeColors = ThemeColors();
 
 AppBar customAppBar(BuildContext context) {
   return AppBar(

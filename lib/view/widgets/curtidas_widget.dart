@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/theme.dart';
+import 'package:mic_check_one_two/view/widgets/dialog_play_music.dart';
 
 class CurtidasWidget extends StatefulWidget {
   CurtidasWidget({super.key});
@@ -8,9 +9,9 @@ class CurtidasWidget extends StatefulWidget {
   State<CurtidasWidget> createState() => _CurtidasWidgetState();
 }
 
-class _CurtidasWidgetState extends State<CurtidasWidget> {
-  ThemeColors themeColors = ThemeColors();
+ThemeColors themeColors = ThemeColors();
 
+class _CurtidasWidgetState extends State<CurtidasWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +33,7 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
           ),
           Column(
             children: [
-              for (int index = 0; index < 5; index++)
+              for (int index = 0; index < 20; index++)
                 _recomendadoWidget(context),
             ],
           ),
@@ -55,8 +56,8 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                 const SizedBox(height: 10),
                 SizedBox(
                   child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 10,
+                    width: MediaQuery.of(context).size.width + 10,
+                    height: (MediaQuery.of(context).size.height / 10) + 10,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         gradient: themeColors.gradient),
@@ -139,18 +140,25 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                                   width:
                                       MediaQuery.of(context).size.width / 1.45,
                                   // color: Colors.red,
-                                  child: const Row(
+                                  child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Icon(Icons.play_circle_outline,
-                                          size: 25, color: Colors.white),
+                                      InkWell(
+                                        onTap: () {
+                                          dialogPlayMusic(context);
+                                        },
+                                        child: const Icon(
+                                            Icons.play_circle_outline,
+                                            size: 25,
+                                            color: Colors.white),
+                                      ),
                                       SizedBox(
                                         width: 6,
                                       ),
                                       Icon(Icons.favorite,
                                           size: 25,
-                                          color: Color.fromARGB(255, 78, 5, 0)),
+                                          color: themeColors.favorite),
                                     ],
                                   ),
                                 ),

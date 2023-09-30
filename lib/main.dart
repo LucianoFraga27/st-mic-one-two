@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/pages/curtidas_page.dart';
 import 'package:mic_check_one_two/view/pages/modal_page.dart';
 
 void main() {
@@ -12,11 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mic Check One Two',
+      title: 'One Two',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: const ModalPage(),
-      routes: {'/home': (_) => const ModalPage()},
+      routes: {'/home': (_) => const ModalPage(),
+      '/curtidas': (_) => const CurtidasPage()},
     );
   }
 }

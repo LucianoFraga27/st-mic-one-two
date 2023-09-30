@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/pages/home_page.dart';
+import 'package:mic_check_one_two/view/pages/meuperfil_page.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/app_bar.dart';
 
@@ -61,7 +62,7 @@ class _ModalPageState extends State<ModalPage> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Perfil',
+          label: 'Meu Perfil',
         ),
       ],
       currentIndex: _selectedIndex,
@@ -86,9 +87,7 @@ const List<Widget> _pages = <Widget>[
   Text(
     'Index 3: Settings',
   ),
-  Text(
-    'Index 4: Settings',
-  ),
+  MeuPerfilPage(),
 ];
 
 Widget _home() {
