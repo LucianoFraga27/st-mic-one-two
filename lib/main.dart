@@ -16,9 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'One Two',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: const ModalPage(),
-      routes: {'/home': (_) => const ModalPage(),
-      '/curtidas': (_) => const CurtidasPage()},
+      home: ModalPage(),
+      routes: {
+        '/home': (_) => ModalPage(),
+        '/curtidas': (_) => const CurtidasPage()
+      },
     );
   }
 }
