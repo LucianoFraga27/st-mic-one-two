@@ -146,7 +146,12 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          dialogPlayMusic(context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return MusicDialog(); // Chama o MusicDialog() dentro do showDialog
+                                            },
+                                          );
                                         },
                                         child: const Icon(
                                             Icons.play_circle_outline,

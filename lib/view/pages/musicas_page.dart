@@ -101,7 +101,7 @@ class _MusicasPageState extends State<MusicasPage> {
           separatorBuilder: (context, index) => const SizedBox(height: 20),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: 10, // O número de cartões de música que você deseja criar
+          itemCount: 10,
           itemBuilder: (context, index) {
             return CardMusica();
           },

@@ -48,7 +48,12 @@ class _CardMusicaState extends State<CardMusica> {
                         onTap: () {},
                         child: IconButton(
                           onPressed: () {
-                            dialogPlayMusic(context);
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return MusicDialog(); // Chama o MusicDialog() dentro do showDialog
+                              },
+                            );
                           },
                           icon: const Icon(
                             Icons

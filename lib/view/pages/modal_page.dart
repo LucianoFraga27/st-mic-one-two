@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/pages/home_page.dart';
 import 'package:mic_check_one_two/view/pages/meuperfil_page.dart';
 import 'package:mic_check_one_two/view/pages/musicas_page.dart';
+import 'package:mic_check_one_two/view/pages/pesquisa_page.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/app_bar.dart';
 
@@ -80,9 +81,7 @@ int _selectedIndex = 0;
 List<Widget> _pages = <Widget>[
   const HomePage(),
   MusicasPage(),
-  Text(
-    'Index 2: School',
-  ),
+  PesquisaMusicaPage(),
   Text(
     'Index 3: Settings',
   ),
