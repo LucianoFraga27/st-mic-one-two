@@ -57,6 +57,7 @@ class OpcoesWidget extends StatelessWidget {
               child: _cardEsquerda(
                   context, Icons.view_compact_sharp, "Reproduções")),
         ),
+        /*
         Padding(
           padding: const EdgeInsets.all(3.0),
           child: InkWell(
@@ -65,6 +66,7 @@ class OpcoesWidget extends StatelessWidget {
               child:
                   _cardEsquerda(context, Icons.filter_list_alt, "Playlists")),
         ),
+        */
       ],
     ));
   }
@@ -115,6 +117,7 @@ class OpcoesWidget extends StatelessWidget {
               child: _cardEsquerda(
                   context, Icons.cloud_upload_outlined, "Upload")),
         ),
+        /*
         Padding(
           padding: const EdgeInsets.all(3.0),
           child: InkWell(
@@ -124,6 +127,7 @@ class OpcoesWidget extends StatelessWidget {
               splashColor: Colors.black.withOpacity(0.2),
               child: _cardEsquerda(context, Icons.person, "Perfil")),
         ),
+        */
         Padding(
           padding: const EdgeInsets.all(3.0),
           child: InkWell(
