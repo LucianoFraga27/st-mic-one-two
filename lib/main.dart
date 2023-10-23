@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/pages/curtidas_page.dart';
+import 'package:mic_check_one_two/view/pages/login_page.dart';
 import 'package:mic_check_one_two/view/pages/modal_page.dart';
 
 void main() {
@@ -16,8 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'One Two',
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: ModalPage(),
       routes: {
+        '/': (_) => LoginPage(),
         '/home': (_) => ModalPage(),
         '/curtidas': (_) => const CurtidasPage()
       },
