@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/notificacao_widget.dart';
+import 'package:mic_check_one_two/view/widgets/sair_app_widget.dart';
 
 ThemeColors themeColors = ThemeColors();
 
@@ -17,6 +18,14 @@ AppBar customAppBar(BuildContext context) {
         );
       }, Icons.notifications_none_outlined),
       const SizedBox(width: 10),
+      _action(() {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return SairDoAppWidget(); // Crie uma instância de NotificationsDialog
+          },
+        );
+      }, Icons.logout),
     ],
   );
 }

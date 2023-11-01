@@ -19,8 +19,8 @@ class _MeuPerfilPageState extends State<MeuPerfilPage> {
           SizedBox(height: 20),
           CircleAvatar(
             radius: 80,
-            backgroundImage: AssetImage(
-                'assets/meuperfil.png'), // Substitua pelo caminho da imagem do usuário
+            backgroundImage: NetworkImage(
+                'https://onetwo-arquivos-estudo.s3.us-east-2.amazonaws.com/catalogo/22479294-ff0f-430d-87da-d7b82988151e_IMG-20230130-WA0046.jpg'),
           ),
           SizedBox(height: 20),
           Text(
