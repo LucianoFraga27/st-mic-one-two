@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/pages/curtidas_page.dart';
 import 'package:mic_check_one_two/view/pages/login_page.dart';
 import 'package:mic_check_one_two/view/pages/modal_page.dart';
+import 'package:mic_check_one_two/view/pages/register_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (_) => LoginPage(),
+        '/register': (_) => RegisterPage(),
         '/home': (_) => ModalPage(),
         '/curtidas': (_) => const CurtidasPage()
       },

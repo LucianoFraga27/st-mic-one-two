@@ -1,40 +1,81 @@
-import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  Credentials? _credentials;
-
-  late Auth0 auth0;
-
-  @override
-  void initState() {
-    super.initState();
-    auth0 = Auth0('dev-avk6v4jdo8ysj2f1.us.auth0.com',
-        'pUtbLry4m9fYywvDGtYFyGIK9MUJRsEY');
-  }
-
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (_credentials == null)
-          ElevatedButton(
-              onPressed: () async {
-                final credentials = await auth0.webAuthentication().login();
-
-                setState(() {
-                  _credentials = credentials;
-                });
-              },
-              child: const Text("Log in"))
-      ],
+    return Scaffold(
+      body: Container(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 100),
+              Image.asset(
+                'assets/onetwo-logo.png', // Adicione o caminho da imagem aqui
+                width: 250, // Defina o tamanho da imagem
+                height: 250,
+              ),
+              SizedBox(height: 40),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Senha',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 16),
+              Container(
+                width: 200,
+                height: 50,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.grey, Colors.grey.shade600],
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/home',
+                      (route) => false,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.transparent,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: Text('Criar conta'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
