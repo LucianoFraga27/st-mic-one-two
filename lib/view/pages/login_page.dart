@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mic_check_one_two/domain/repository/login/vm/login_vm.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  final userNameController = TextEditingController();
+
+  final userPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +29,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 40),
               TextFormField(
+                controller: userNameController,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
@@ -25,6 +37,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               TextFormField(
+                controller: userPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Senha',
@@ -43,11 +56,22 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      '/home',
-                      (route) => false,
-                    );
+                    final loginVM = ref.watch(LoginViewModelProvider(
+                        password: userPasswordController.text,
+                        username: userNameController.text));
+
+                    loginVM.when(
+                        data: (data) {
+                          print("clicou");
+
+                          return Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/home',
+                            (route) => false,
+                          );
+                        },
+                        error: (e, s) => Container(),
+                        loading: () => CircularProgressIndicator());
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.transparent,
