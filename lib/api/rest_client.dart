@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:mic_check_one_two/api/interceptor.dart';
 import '/environment.dart';
 
-// import 'package:dio/io.dart';                    //! Native   DioForNative
-import 'package:dio/browser.dart'; //! Browser  DioForBrowser
+import 'package:dio/io.dart';                    //! Native   DioForNative
+// import 'package:dio/browser.dart'; //! Browser  DioForBrowser
 
-final class RestClient extends DioForBrowser {
+final class RestClient extends DioForNative {
   RestClient()
       : super(BaseOptions(
           baseUrl: Environment.backendLOCAL,
