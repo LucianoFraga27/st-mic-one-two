@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mic_check_one_two/domain/repository/login/login_repository.dart';
+import 'package:mic_check_one_two/domain/repository/login/login_repository_temp.dart';
 import 'package:mic_check_one_two/domain/repository/login/vm/login_vm.dart';
+import 'package:mic_check_one_two/environment.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   @override
@@ -8,9 +12,21 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  final userNameController = TextEditingController();
+  final userNameController = TextEditingController(text: "lucas@email.com");
 
-  final userPasswordController = TextEditingController();
+  final userPasswordController = TextEditingController(text: "12345");
+  late SharedPreferences sp;
+  late LoginRepositoryTemp loginRepository;
+
+   _initialize() async {
+    sp = await SharedPreferences.getInstance();
+    loginRepository = LoginRepositoryTemp();
+  }
+  @override
+  void initState()  {
+    super.initState();
+    _initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +71,76 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: ElevatedButton(
-                  onPressed: () {
-                    final loginVM = ref.watch(LoginViewModelProvider(
-                        password: userPasswordController.text,
-                        username: userNameController.text));
+                  onPressed: () async {
+                    bool isLoading = true;
+                    bool login = false;
 
-                    loginVM.when(
-                        data: (data) {
-                          print("clicou");
+                    // Mostrar o indicador de carregamento
+                    setState(() {
+                      isLoading = true;
+                    });
 
-                          return Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            '/home',
-                            (route) => false,
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: 100,
+                          child: Center(
+                            child:
+                                CircularProgressIndicator(), // Indicador de carregamento
+                          ),
+                        );
+                      },
+                    );
+
+                    // Aguardar 2 segundos (simulando um atraso)
+                    List results = await Future.wait([
+                      Future.delayed(Duration(
+                          seconds:
+                              2)), // Aguardar 2 segundos (simulando um atraso)
+                      loginRepository.login(
+                          userNameController.text, userPasswordController.text),
+                    ]);
+                    // Fechar o indicador de carregamento
+                    Navigator.of(context).pop();
+
+                    // Executar a solicitação de login
+
+                    if (results[1]) {
+
+                      
+                     final username = sp.getString(LocalStorageKeys.usernameUsuario);
+
+                      print(username);
+                      if(username == 'null') {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context, "/adicionar-dadospessoais", (route) => false);
+                      } else {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context, "/home", (route) => false);
+                      }
+
+                      
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Login Inválido"),
+                            content: Text(
+                                "Por favor, verifique suas credenciais e tente novamente."),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text("OK"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
                           );
                         },
-                        error: (e, s) => Container(),
-                        loading: () => CircularProgressIndicator());
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.transparent,

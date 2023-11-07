@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 
 class MeuPerfilPage extends StatefulWidget {
-  const MeuPerfilPage({Key? key}) : super(key: key);
+  final String nome;
+  final String email;
+  final String foto;
+
+  MeuPerfilPage({
+    required this.nome,
+    required this.email,
+    required this.foto,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _MeuPerfilPageState createState() => _MeuPerfilPageState();
+  _MeuPerfilPageState createState() => _MeuPerfilPageState(email: email, foto: foto, nome: nome);
 }
 
 class _MeuPerfilPageState extends State<MeuPerfilPage> {
-  bool exibirGrafico = false;
+  
+_MeuPerfilPageState({this.nome, this.email, this.foto});
 
+  String? nome;
+  String? email;
+  String? foto;
+  
+  
+  bool exibirGrafico = false;
+  
   @override
   Widget build(BuildContext context) {
+    print(nome.toString());
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,28 +38,23 @@ class _MeuPerfilPageState extends State<MeuPerfilPage> {
           CircleAvatar(
             radius: 80,
             backgroundImage: NetworkImage(
-                'https://onetwo-arquivos-estudo.s3.us-east-2.amazonaws.com/catalogo/22479294-ff0f-430d-87da-d7b82988151e_IMG-20230130-WA0046.jpg'),
+                foto.toString()),
           ),
           SizedBox(height: 20),
           Text(
-            'Lucas Silva',
+            nome.toString(),
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            'lucas@email.com',
+            email.toString(),
             style: TextStyle(
               fontSize: 18,
             ),
           ),
-          Text(
-            'Luciano Lucas Silva',
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
+          
           SizedBox(height: 20),
           _infos(),
           SizedBox(height: 20),

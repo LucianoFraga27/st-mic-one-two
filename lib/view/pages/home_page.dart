@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/widgets/destaque_topum.dart';
+import 'package:mic_check_one_two/view/widgets/prod_audio.dart';
 import 'package:mic_check_one_two/view/widgets/destaque_widget.dart';
 import 'package:mic_check_one_two/view/widgets/opcoes_widget.dart';
 import 'package:mic_check_one_two/view/widgets/recomendados_widget.dart';
@@ -22,12 +24,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             Column(
               children: [
-                const SizedBox(height: 20),
-                DestaqueWidget(),
-                const SizedBox(height: 25),
+                //OpcoesWidget(),
+                DestaqueTopUmWidget(),
                 OpcoesWidget(),
                 const SizedBox(height: 20),
                 RecomendadosWidget(),
+                
                 const SizedBox(height: 0),
                 // CurtidasWidget(),
                 const SizedBox(height: 30),
