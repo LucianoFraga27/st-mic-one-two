@@ -35,5 +35,20 @@ final loginRepositoryProvider = Provider<LoginRepository>.internal(
 );
 
 typedef LoginRepositoryRef = ProviderRef<LoginRepository>;
+String _$usuarioRiverpodHash() => r'73559eb58de66acb50b6a151c37e8b3904c86a7f';
+
+/// See also [usuarioRiverpod].
+@ProviderFor(usuarioRiverpod)
+final usuarioRiverpodProvider = Provider<UsuarioRiverpod>.internal(
+  usuarioRiverpod,
+  name: r'usuarioRiverpodProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$usuarioRiverpodHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UsuarioRiverpodRef = ProviderRef<UsuarioRiverpod>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -6,7 +6,7 @@ part of 'login_vm.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginViewModelHash() => r'36c13f6c77a460f112e6672dea3eca7dc36fab0e';
+String _$loginViewModelHash() => r'f31264f376e8a40eb02a94cb09acc3926514dacd';
 
 /// Copied from Dart SDK
 class _SystemHash {
