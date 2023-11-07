@@ -76,7 +76,7 @@ class OpcoesWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width / 2.3,
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-            gradient: themeColors.gradient3,
+            color: Colors.grey,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
@@ -112,7 +112,10 @@ class OpcoesWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(3.0),
           child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/upload-musica');
+
+              },
               splashColor: Colors.black.withOpacity(0.2),
               child: _cardEsquerda(
                   context, Icons.cloud_upload_outlined, "Upload")),

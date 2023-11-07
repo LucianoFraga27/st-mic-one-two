@@ -21,7 +21,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(right: 8.0, left: 8.0, bottom: 2.0),
+            padding: EdgeInsets.only(right: 8.0, left: 15.0, bottom: 2.0),
             child: Text(
               "Em alta",
               style: TextStyle(

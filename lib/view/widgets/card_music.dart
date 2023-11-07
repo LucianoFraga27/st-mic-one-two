@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/widgets/prod_audio.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/dialog_perfil_famoso.dart';
 import 'package:mic_check_one_two/view/widgets/dialog_play_music.dart';
+import 'package:mic_check_one_two/view/widgets/prod_audio_2.dart';
 
 class CardMusica extends StatefulWidget {
   const CardMusica({super.key});
@@ -36,63 +38,13 @@ class _CardMusicaState extends State<CardMusica> {
                         0, 1), // Deslocamento da sombra (horizontal, vertical)
                   ),
                 ],
-                gradient: themeColors.gradient),
+                color: Colors.grey.withOpacity(0.6),),
             child: Stack(
               children: [
                 Positioned(
                   right: 8.0, // Ajuste a posição horizontal conforme necessário
                   bottom: 8.0, // Ajuste a posição vertical conforme necessário
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: IconButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return MusicDialog(); // Chama o MusicDialog() dentro do showDialog
-                              },
-                            );
-                          },
-                          icon: const Icon(
-                            Icons
-                                .play_circle_outline_rounded, // Ícone no canto inferior direito
-                            color: Colors.white,
-                            size: 26,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 15),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            if (favorito == false) {
-                              corFavorite = themeColors.favorite;
-                              favorito = true;
-                            } else {
-                              corFavorite = Colors.white;
-                              favorito = false;
-                            }
-                          });
-                        },
-                        icon: Icon(
-                          Icons.favorite, // Ícone no canto inferior direito
-                          color: corFavorite,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(width: 15),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.share_rounded,
-                          color: const Color.fromARGB(255, 47, 47, 47),
-                          size: 24,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: AudioPlayerUrl_2(),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -112,8 +64,8 @@ class _CardMusicaState extends State<CardMusica> {
                                   color: Colors.black
                                       .withOpacity(0.2), // Cor da sombra
                                   spreadRadius:
-                                      5, // Raio de propagação da sombra
-                                  blurRadius: 7, // Raio de desfoque da sombra
+                                      3, // Raio de propagação da sombra
+                                  blurRadius: 2, // Raio de desfoque da sombra
                                   offset: const Offset(0,
                                       3), // Deslocamento da sombra (horizontal, vertical)
                                 ),
@@ -133,6 +85,7 @@ class _CardMusicaState extends State<CardMusica> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 10,),
                         const Text(
                           "De Manhã",
                           style: TextStyle(
@@ -147,7 +100,8 @@ class _CardMusicaState extends State<CardMusica> {
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w300),
                           ),
-                        )
+                        ),
+
                       ],
                     ),
                   ],
@@ -158,5 +112,63 @@ class _CardMusicaState extends State<CardMusica> {
         ],
       ),
     );
+  }
+
+  Row _BTNS(BuildContext context) {
+    return Row(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: IconButton(
+                        onPressed: () {
+                          print("Entrou aqui");
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (context) {
+                          //     return MusicDialog(); // Chama o MusicDialog() dentro do showDialog
+                          //   },
+                          // );
+                        Navigator.of(context).push(MaterialPageRoute(
+builder: (context) => AudioPlayerUrl(),
+));
+                        },
+                        icon: const Icon(
+                          Icons
+                              .play_circle_outline_rounded, // Ícone no canto inferior direito
+                          color: Colors.white,
+                          size: 26,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          if (favorito == false) {
+                            corFavorite = themeColors.favorite;
+                            favorito = true;
+                          } else {
+                            corFavorite = Colors.white;
+                            favorito = false;
+                          }
+                        });
+                      },
+                      icon: Icon(
+                        Icons.favorite, // Ícone no canto inferior direito
+                        color: corFavorite,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.share_rounded,
+                        color: const Color.fromARGB(255, 47, 47, 47),
+                        size: 24,
+                      ),
+                    ),
+                  ],
+                );
   }
 }

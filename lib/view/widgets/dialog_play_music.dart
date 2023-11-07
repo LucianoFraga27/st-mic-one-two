@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/widgets/prod_audio.dart';
 
 class MusicDialog extends StatefulWidget {
   @override
   _MusicDialogState createState() => _MusicDialogState();
 }
 
-class _MusicDialogState extends State<MusicDialog> {
+class _MusicDialogState extends State<MusicDialog> with WidgetsBindingObserver {
   bool isPlaying = false;
   bool isFavorite = false;
+
 
   void togglePlay() {
     setState(() {
       isPlaying = !isPlaying;
     });
-    // Lógica de reprodução da música aqui
   }
 
   void toggleFavorite() {
@@ -25,9 +26,6 @@ class _MusicDialogState extends State<MusicDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
       child: Container(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -36,15 +34,11 @@ class _MusicDialogState extends State<MusicDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Positioned(
-                  top: 10,
-                  right: 0,
-                  child: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+                IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
               ],
             ),
@@ -74,36 +68,9 @@ class _MusicDialogState extends State<MusicDialog> {
                 fontSize: 16,
               ),
             ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
-                  ), // Ícone de reprodução/pausa
-                  onPressed: togglePlay,
-                ),
-                IconButton(
-                  icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite ? Colors.red : null,
-                  ), // Ícone de curtir
-                  onPressed: toggleFavorite,
-                ),
-                IconButton(
-                  icon: Icon(Icons.share_rounded), // Ícone de compartilhar
-                  onPressed: () {
-                    // Lógica de compartilhamento
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            LinearProgressIndicator(
-              color: Colors.black,
-              value: 0.5, // Substitua pelo progresso real da música
-            ),
+            
+            SizedBox(height: 0),
+            AudioPlayerUrl()
           ],
         ),
       ),
