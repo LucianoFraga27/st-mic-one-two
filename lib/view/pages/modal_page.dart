@@ -51,47 +51,34 @@ class _ModalPageState extends ConsumerState<ModalPage> {
           loading: () => Center(child: CircularProgressIndicator()),
           error: (e, s) => Container()),
       bottomNavigationBar: _customButtonNavigationBar(),
-      // floatingActionButton: Container(
-      //   decoration: BoxDecoration(
-      //       borderRadius: BorderRadius.circular(15),
-      //       gradient: themeColors.gradient2),
-      //   child:
-      //    FloatingActionButton(
-      //       onPressed: () {},
-      //       backgroundColor: Colors.transparent,
-      //       child: const Icon(
-      //         Icons.add,
-      //         color: Colors.white,
-      //       )),
-      // ),
-    );
+     );
   }
 
   _customButtonNavigationBar() {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Início',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.play_circle_sharp),
-          label: 'Musicas',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Pesquisar',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Meu Perfil',
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Colors.black,
-      selectedIconTheme: const IconThemeData(color: Colors.black),
-      unselectedIconTheme: const IconThemeData(color: Colors.grey),
-      onTap: onItemTapped,
-    );
+    return  BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Início',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.play_circle_sharp),
+              label: 'Musicas',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Pesquisar',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Meu Perfil',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: onItemTapped,
+          selectedItemColor: Color.fromARGB(255, 170, 100, 255),
+          unselectedItemColor: Colors.grey,
+          
+        );
   }
 }
