@@ -56,11 +56,12 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                 const SizedBox(height: 10),
                 SizedBox(
                   child: Container(
+                   
                     width: MediaQuery.of(context).size.width + 10,
                     height: (MediaQuery.of(context).size.height / 10) + 10,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        gradient: themeColors.gradient),
+                         color:Color.fromARGB(255, 205, 165, 255)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,7 +123,7 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                      Icon(Icons.share_rounded, size: 17),
+                                      //Icon(Icons.share_rounded, size: 17),
                                     ],
                                   ),
                                 ),
@@ -161,9 +162,9 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                                       SizedBox(
                                         width: 6,
                                       ),
-                                      Icon(Icons.favorite,
-                                          size: 25,
-                                          color: themeColors.favorite),
+                                      // Icon(Icons.favorite,
+                                      //     size: 25,
+                                      //     color: themeColors.favorite),
                                     ],
                                   ),
                                 ),

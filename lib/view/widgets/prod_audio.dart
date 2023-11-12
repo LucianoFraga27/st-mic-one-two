@@ -11,7 +11,7 @@ class _AudioPlayerUrlState extends State<AudioPlayerUrl> {
   AudioPlayer audioPlayer = AudioPlayer();
   PlayerState audioPlayerState = PlayerState.paused;
   String url =
-      "https://onetwo-arquivos-estudo.s3.us-east-2.amazonaws.com/catalogo/3d168237-3068-437d-abbc-41c40f9cfc25_2P%20calli.%20V%C3%A1rias%20T%C3%A1ticas%20MASTER%20V1.mp3";
+      "https://onetwo-arquivos-estudo.s3.us-east-2.amazonaws.com/catalogo/29a76bd9-a6e2-4f41-be13-73e338d01d06_2P+calli.+V%C3%A1rias+T%C3%A1ticas+MASTER+V1.mp3";
 
   int timeProgress = 0;
   int audioDuration = 0;

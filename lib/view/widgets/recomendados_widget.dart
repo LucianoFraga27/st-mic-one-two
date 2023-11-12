@@ -21,7 +21,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(right: 8.0, left: 15.0, bottom: 2.0),
+            padding: EdgeInsets.only(right: 8.0, left: 15.0),
             child: Text(
               "Em alta",
               style: TextStyle(
@@ -32,8 +32,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
           ),
           Container(
             height: MediaQuery.of(context).size.height / 4.5,
-            color: Colors
-                .transparent, // Defina a altura desejada para a lista horizontal
+            color: Colors.transparent,// Defina a altura desejada para a lista horizontal
             child: ListView.separated(
               scrollDirection: Axis.horizontal, // Define o eixo horizontal
               itemBuilder: (BuildContext context, int index) {
@@ -86,10 +85,9 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                     borderRadius: BorderRadius.circular(10.0),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black
-                                            .withOpacity(0.2), // Cor da sombra
+                                        color:Color.fromARGB(255, 205, 165, 255), // Cor da sombra
                                         spreadRadius:
-                                            2, // Raio de propagação da sombra
+                                            1, // Raio de propagação da sombra
                                         blurRadius:
                                             4, // Raio de desfoque da sombra
                                         offset: const Offset(3,

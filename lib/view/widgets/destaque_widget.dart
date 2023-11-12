@@ -26,9 +26,9 @@ class _DestaqueWidgetState extends State<DestaqueWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.only(right: 8.0, left: 8.0, bottom: 8.0),
+          padding: EdgeInsets.only(right: 8.0, left: 10.0, bottom: 8.0, top: 20),
           child: Text(
-            "Lotando as casas",
+            "TOP #1 - Lotando as casas",
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -53,7 +53,9 @@ class _DestaqueWidgetState extends State<DestaqueWidget> {
                           1), // Deslocamento da sombra (horizontal, vertical)
                     ),
                   ],
-                  gradient: themeColors.gradient,
+                  // gradient: themeColors.gradient,
+                  color:Color.fromARGB(255, 205, 165, 255)
+
                 ),
                 child: Stack(
                   children: [
@@ -115,7 +117,7 @@ class _DestaqueWidgetState extends State<DestaqueWidget> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.2),
-                                    spreadRadius: 5,
+                                    spreadRadius: 2,
                                     blurRadius: 7,
                                     offset: const Offset(0, 3),
                                   ),
@@ -136,6 +138,7 @@ class _DestaqueWidgetState extends State<DestaqueWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(height: 10,),
                             const Text(
                               "De Manhã",
                               style: TextStyle(
