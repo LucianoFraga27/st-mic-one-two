@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
 
 class MeuPerfilPage extends StatefulWidget {
   final String nome;
@@ -88,7 +89,7 @@ _MeuPerfilPageState({this.nome, this.email, this.foto});
                     // Cor de fundo transparente
                     onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                   ),
-                  child: Text('Estatísticas'),
+                  child: Text('Popularidade'),
                 ),
               ),
               SizedBox(width: 20),
@@ -105,22 +106,22 @@ _MeuPerfilPageState({this.nome, this.email, this.foto});
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(
-          children: [
-            Text(
-              'Faixas',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '13',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
+        // Column(
+        //   children: [
+        //     Text(
+        //       'Faixas',
+        //       style: TextStyle(
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
+        //     Text(
+        //       '13',
+        //       style: TextStyle(
+        //         fontSize: 18,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         SizedBox(width: 20),
         Column(
           children: [
@@ -161,19 +162,32 @@ _MeuPerfilPageState({this.nome, this.email, this.foto});
 
   Widget _exibirGrafico() {
     // Lógica para exibir o gráfico aqui
-    return Container(
-      width: 200,
-      height: 200,
-      color: Colors.blue, // Substitua pelo gráfico real
+    return DataTable(
+          columns: [
+            DataColumn(label: Text('Título da Música')),
+            DataColumn(label: Text('Curtidas')),
+          ],
+          rows: [
+            DataRow(cells: [
+              DataCell(Text('Nome da Música 1')),
+              DataCell(Text('100')),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('Nome da Música 2')),
+              DataCell(Text('150')),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('Nome da Música 3')),
+              DataCell(Text('80')),
+            ]),
+            // Adicione mais linhas conforme necessário
+          ],
+        
     );
   }
 
   Widget _minhasFaixas() {
     // Lógica para exibir o gráfico aqui
-    return Container(
-      width: 200,
-      height: 200,
-      color: Colors.red, // Substitua pelo gráfico real
-    );
+    return MinhaFaixaWidget();
   }
 }

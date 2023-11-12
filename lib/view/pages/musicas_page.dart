@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/widgets/card_music.dart';
 import 'package:mic_check_one_two/view/widgets/destaque_widget.dart';
+import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
+import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
+import 'package:mic_check_one_two/view/widgets/seguindo_widget.dart';
 
 class MusicasPage extends StatefulWidget {
   @override
@@ -86,7 +89,7 @@ class _MusicasPageState extends State<MusicasPage> {
           physics: NeverScrollableScrollPhysics(),
           itemCount: 10, // O número de cartões de música que você deseja criar
           itemBuilder: (context, index) {
-            return CardMusica();
+            return ParaVoceWidget();
           },
         ),
       ],
@@ -103,7 +106,7 @@ class _MusicasPageState extends State<MusicasPage> {
           physics: NeverScrollableScrollPhysics(),
           itemCount: 10,
           itemBuilder: (context, index) {
-            return CardMusica();
+            return SeguindoWidget();
           },
         ),
       ],
