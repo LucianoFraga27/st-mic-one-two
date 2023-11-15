@@ -23,7 +23,7 @@ class UsuarioState {
   @riverpod
   class UsuarioVm extends _$UsuarioVm {
     Future<dynamic> _representacaoUsuario() =>
-      ref.watch(usuarioRiverpodProvider).representacaoUsuario();
+      ref.watch(usuarioRiverpodProvider).representacaoUsuario(id.toString());
    
  @override
   Future<UsuarioState> build(

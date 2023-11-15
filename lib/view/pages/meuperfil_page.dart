@@ -5,26 +5,33 @@ class MeuPerfilPage extends StatefulWidget {
   final String nome;
   final String email;
   final String foto;
-
+  final String genero;
+  final int seguidores;
+  final int seguindo;
   MeuPerfilPage({
     required this.nome,
     required this.email,
     required this.foto,
+    required this.genero,
+    required this.seguidores,
+    required this.seguindo,
     Key? key,
   }) : super(key: key);
 
   @override
-  _MeuPerfilPageState createState() => _MeuPerfilPageState(email: email, foto: foto, nome: nome);
+  _MeuPerfilPageState createState() => _MeuPerfilPageState(email: email, foto: foto, nome: nome, genero: genero, seguidores: seguidores, seguindo: seguindo);
 }
 
 class _MeuPerfilPageState extends State<MeuPerfilPage> {
   
-_MeuPerfilPageState({this.nome, this.email, this.foto});
+_MeuPerfilPageState({this.nome, this.email, this.foto, this.genero, this.seguidores, this.seguindo});
 
   String? nome;
   String? email;
   String? foto;
-  
+  String? genero;
+  int? seguidores;
+  int? seguindo;
   
   bool exibirGrafico = false;
   
@@ -132,7 +139,7 @@ _MeuPerfilPageState({this.nome, this.email, this.foto});
               ),
             ),
             Text(
-              '567',
+              seguidores.toString(),
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -149,7 +156,7 @@ _MeuPerfilPageState({this.nome, this.email, this.foto});
               ),
             ),
             Text(
-              '567',
+              seguindo.toString(),
               style: TextStyle(
                 fontSize: 18,
               ),

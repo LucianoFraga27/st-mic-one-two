@@ -4,7 +4,7 @@ sealed class LocalStorageKeys {
   static const accessToken = 'ACCESS_TOKEN_KEY';
   static const idUsuario = 'ID_USUARIO';
   static const usernameUsuario = 'USERNAME_USUARIO';
-  
+  static const generoFavorito = 'GENERO_FAVORITO';
 }
 
 sealed class Environment {

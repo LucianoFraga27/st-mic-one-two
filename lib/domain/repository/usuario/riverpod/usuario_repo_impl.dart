@@ -12,16 +12,37 @@ class UsuarioRepoImpl implements UsuarioRiverpod {
   });
   
   @override
-  Future representacaoUsuario() async {
+  Future representacaoUsuario(String id) async {
      try {
-      final sp = await SharedPreferences.getInstance();
-     String id = sp.getString(LocalStorageKeys.idUsuario) ?? "0";
      final Response(:data) = await restClient.auth.get("/v1/usuario/$id");
      print(data);
+     // satar genero preferido no local storage.
      return data;
      } on DioException catch (e, s) {
       return null;
      }
+  }
+  
+  @override
+  Future<List> listarSeguidoresDoUsuario(int id) async {
+    try {
+      final Response(:data) = await restClient.auth.get('/v1/usuario/$id/seguidores');
+      print(data);
+      return data;
+    } on DioException catch (e) {
+       throw Exception('Falha ao buscar musicas do usuario');
+    }
+  }
+  
+  @override
+  Future<List> listarSeguindoDoUsuario(int id) async {
+    try {
+      final Response(:data) = await restClient.auth.get('/v1/usuario/$id/seguindo');
+      print(data);
+      return data;
+    } on DioException catch (e) {
+       throw Exception('Falha ao buscar musicas do usuario');
+    }
   }
 
 }
