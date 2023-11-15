@@ -9,7 +9,8 @@ AppBar customAppBar(BuildContext context) {
   ThemeColors themeColors = ThemeColors();
 
   return AppBar(
-    title: const Text("OneTwo", style: TextStyle(fontWeight: FontWeight.w600, color: Color.fromARGB(255, 123, 70, 187),)),
+    title: Image.asset("assets/onetwo-icone-semfundo.png", width: 45,),
+    // const Text("OneTwo", style: TextStyle(fontWeight: FontWeight.w600, color: Color.fromARGB(255, 123, 70, 187),)),
     actions: [
       // _action(
       //   () {
@@ -47,7 +48,7 @@ InkWell _action(onTap, icon) {
     onTap: onTap,
     child: Padding(
       padding: const EdgeInsets.all(8),
-      child: Icon(icon, size: 25, color: Color.fromARGB(255, 123, 70, 187),),
+      child: Icon(icon, size: 25, color: const Color.fromARGB(255, 224, 45, 255),),
     ),
   );
 }

@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 
 class ThemeColors {
+  var login = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      const Color.fromARGB(255, 237, 136, 255),
+      const Color.fromARGB(255, 255, 131, 172),
+      const Color.fromARGB(255, 233, 127, 127)
+    ], // Cores do gradiente
+  );
+
+  var loginbtn = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color.fromARGB(255, 148, 0, 174),
+      Color.fromARGB(255, 195, 43, 94),
+      Colors.purple
+    ], // Cores do gradiente
+  );
+
   var gradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

@@ -13,11 +13,21 @@ class SobreOAPPWiget extends StatelessWidget {
   width: MediaQuery.of(context).size.width / 1.1,
   height: MediaQuery.of(context).size.height / 4.6,
   decoration: BoxDecoration(
-    color: Colors.red,
+    boxShadow: [
+       BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+    ],
     borderRadius: BorderRadius.circular(20.0), // Ajuste o valor conforme necessário
   ),
-)
-        ],
+  child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image.asset("assets/noticia-onetwo.png", fit: BoxFit.cover,),
+    )
+      )],
       ),
     );
   }
