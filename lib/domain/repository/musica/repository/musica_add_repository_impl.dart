@@ -8,40 +8,34 @@ import 'package:mic_check_one_two/environment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MusicaAddRepository {
-  @override
-  Future<void> adicionarMusica(String titulo, File arquivoAudio, XFile arquivoCapa, GeneroMusical genero) async {
-    
-    print("titulo $titulo");
-    print("genero $genero");
-    
-    print("arquivoAudio $arquivoAudio");
-    print("arquivoCapa $arquivoCapa");
+  Future<bool> adicionarMusica(String titulo, File arquivoAudio,
+      XFile arquivoCapa, GeneroMusical genero) async {
+    Dio dio = Dio(BaseOptions(baseUrl: Environment.backendLOCAL));
+    var sp = await SharedPreferences.getInstance();
+    String idUsuario = sp.getString(LocalStorageKeys.idUsuario).toString();
+    var token = sp.getString(LocalStorageKeys.accessToken);
+    FormData formData = FormData.fromMap({
+      'id_usuario': idUsuario,
+      'titulo': titulo,
+      'genero': genero.name,
+      'audio': await MultipartFile.fromFile(arquivoAudio.path,
+          filename: 'audio.mp3'),
+      'capa':
+          await MultipartFile.fromFile(arquivoCapa.path, filename: 'capa.jpg'),
+    });
 
-     Dio dio = Dio(BaseOptions(baseUrl: Environment.backendLOCAL,connectTimeout: const Duration(seconds: 20),
-          receiveTimeout: const Duration(seconds: 60),));
-     var sp = await SharedPreferences.getInstance();
-     String idUsuario = sp.getString(LocalStorageKeys.idUsuario).toString();
-     FormData formData = FormData.fromMap({
-    'id_usuario': idUsuario,
-    'titulo': titulo,
-    'genero': genero.toString(),
-    'audio': await MultipartFile.fromFile(arquivoAudio.path, filename: 'audio.mp3'),
-    'capa': await MultipartFile.fromFile(arquivoCapa.path, filename: 'capa.jpg'),
-  });
-
-try {
-   final Response(:data) = await dio.post('v1/musica', data: formData);
-   print(data);
-} on DioException catch (e) {
-  if (e.response != null) {
-    print('Erro na resposta: ${e.response!.data}');
-    print('Status code: ${e.response!.statusCode}');
-  } else {
-    print('Erro na requisição: $e');
+    try {
+      final Response(:data) = await dio.post('v1/musica',
+          data: formData,
+          options: Options(headers: {
+            "Authorization":
+                "Bearer $token", // Substitua pelo seu token de autorização
+          }));
+      print(data);
+      return true;
+    } catch (e) {
+      print("Erro na solicitação: $e");
+      return false;
+    }
   }
-} catch (e) {
-  print('Erro desconhecido: $e');
-}
-  }
-  
 }

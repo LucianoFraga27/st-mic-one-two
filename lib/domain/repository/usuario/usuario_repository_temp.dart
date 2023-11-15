@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mic_check_one_two/domain/model/genero_musical.dart';
 import 'package:mic_check_one_two/environment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UsuarioRepositoryTemp {
 
-  Future<bool> addUsernameAndFoto(String username, XFile? fotoPerfil, String id) async {
+  Future<bool> addUsernameAndFoto(String username, XFile? fotoPerfil, String id, GeneroMusical genero) async {
     print("foto perfil");
    print(fotoPerfil);
   
@@ -20,6 +21,7 @@ class UsuarioRepositoryTemp {
      FormData formData = FormData.fromMap({
     'username': username,
     'fotoPerfil': await MultipartFile.fromFile(fotoPerfilPath),
+    'generoFavorito': genero.name
   });
 
     var sp = await SharedPreferences.getInstance();
