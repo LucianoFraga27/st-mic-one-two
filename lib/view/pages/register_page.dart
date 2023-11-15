@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/domain/repository/login/login_repository_temp.dart';
 import 'package:mic_check_one_two/view/pages/login_page.dart';
+import 'package:mic_check_one_two/view/theme.dart';
 import 'package:validatorless/validatorless.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,17 +18,22 @@ class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
 
   late LoginRepositoryTemp loginRepository;
-
+  
   @override
   void initState() {
     loginRepository = LoginRepositoryTemp();
     super.initState();
   }
-
+  ThemeColors themeColors = ThemeColors();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          gradient: themeColors.login
+          
+        ),
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
           child: Form(
@@ -37,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: <Widget>[
                 SizedBox(height: 40),
                 Image.asset(
-                  'assets/onetwo-logo.png', // Adicione o caminho da imagem aqui
+                   'assets/onetwo-icone-semfundo.png',  // Adicione o caminho da imagem aqui
                   width: 250, // Defina o tamanho da imagem
                   height: 250,
                 ),
@@ -85,9 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   width: 200,
                   height: 50,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.grey, Colors.grey.shade600],
-                    ),
+                    gradient:themeColors.loginbtn,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: ElevatedButton(
@@ -171,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       'Registrar',
                       style: TextStyle(
-                        color: Colors.black,
+                        color:  Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

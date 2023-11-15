@@ -4,6 +4,7 @@ import 'package:mic_check_one_two/domain/repository/login/login_repository.dart'
 import 'package:mic_check_one_two/domain/repository/login/login_repository_temp.dart';
 import 'package:mic_check_one_two/domain/repository/login/vm/login_vm.dart';
 import 'package:mic_check_one_two/environment.dart';
+import 'package:mic_check_one_two/view/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -27,11 +28,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     super.initState();
     _initialize();
   }
-
+  ThemeColors themeColors = ThemeColors();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+         height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          gradient: themeColors.login
+          
+        ),
         child: SingleChildScrollView(
           padding: EdgeInsets.only(left: 16, right: 16),
           child: Column(
@@ -39,7 +45,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             children: <Widget>[
               SizedBox(height: 100),
               Image.asset(
-                'assets/onetwo-logo.png', // Adicione o caminho da imagem aqui
+                'assets/onetwo-icone-semfundo.png', // Adicione o caminho da imagem aqui
                 width: 250, // Defina o tamanho da imagem
                 height: 250,
               ),
@@ -65,9 +71,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 width: 200,
                 height: 50,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.grey, Colors.grey.shade600],
-                  ),
+                  gradient: themeColors.loginbtn,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: ElevatedButton(
@@ -152,7 +156,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   child: Text(
                     'Entrar',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

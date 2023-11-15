@@ -163,10 +163,17 @@ class _MusicaUploadPageState extends State<MusicaUploadPage> {
             }
           } else {
             print("Conclui cadastro");
-            await musicaAddRepository.adicionarMusica(tituloController.text,
+            bool result = await musicaAddRepository.adicionarMusica(tituloController.text,
       audioFile!,
       _selectedImage!,
       selectedGenero);
+
+          if (result == true) {
+            print("Conclui cadastro");
+          } else {
+            print("mão Conclui cadastro");
+          }
+
           }
         },
         steps: [
@@ -231,7 +238,7 @@ class _MusicaUploadPageState extends State<MusicaUploadPage> {
             title: Text('Áudio MP3 da Música'),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: [ 
                 Text(
                   'Aqui você pode fazer o upload do áudio em MP3 da música.',
                   style: TextStyle(fontSize: 16),

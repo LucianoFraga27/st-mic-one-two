@@ -76,7 +76,7 @@ class _ModalPageState extends ConsumerState<ModalPage> {
           ],
           currentIndex: _selectedIndex,
           onTap: onItemTapped,
-          selectedItemColor: Color.fromARGB(255, 170, 100, 255),
+          selectedItemColor: const Color.fromARGB(255, 221, 27, 255),
           unselectedItemColor: Colors.grey,
           
         );

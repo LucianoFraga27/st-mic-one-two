@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mic_check_one_two/domain/model/genero_musical.dart';
 import 'package:mic_check_one_two/domain/repository/login/login_repository_temp.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/usuario_repository_temp.dart';
 import 'package:mic_check_one_two/environment.dart';
@@ -48,6 +49,8 @@ class _SendUsernameAndImagePageState extends State<SendUsernameAndImagePage> {
     }
   }
 
+  GeneroMusical selectedGenero = GeneroMusical.FUNK;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +85,7 @@ class _SendUsernameAndImagePageState extends State<SendUsernameAndImagePage> {
                   },
                 );
               } else if (_currentStep < _buildSteps().length - 1) {
-                if (_currentStep == 2 && _usernameController.text.isEmpty) {
+                if (_currentStep == 3 && _usernameController.text.isEmpty) {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -140,7 +143,7 @@ class _SendUsernameAndImagePageState extends State<SendUsernameAndImagePage> {
       String username, XFile? fotoPerfil, String id) async {
     try {
       final success = await usuarioRepositoryTemp.addUsernameAndFoto(
-          username, fotoPerfil, id);
+          username, fotoPerfil, id, selectedGenero);
 
       if (success) {
         Navigator.of(context)
@@ -281,6 +284,40 @@ class _SendUsernameAndImagePageState extends State<SendUsernameAndImagePage> {
         ),
         isActive: _currentStep >= 2,
       ),
+       Step(
+            title: Text('Gênero da Música'),
+            content: Column(
+              children: [
+                Text(
+                  'Selecione o Gênero da Música',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                    return DropdownButton<GeneroMusical>(
+                      value: selectedGenero ?? GeneroMusical.ALTERNATIVE,
+                      onChanged: (GeneroMusical? newValue) {
+                        setState(() {
+                          selectedGenero = newValue ?? GeneroMusical.ALTERNATIVE;
+                        });
+                      },
+                      items: GeneroMusical.values
+                          .map<DropdownMenuItem<GeneroMusical>>(
+                        (GeneroMusical value) {
+                          
+                          return DropdownMenuItem<GeneroMusical>(
+                            value: value,
+                            child: Text(value.toString().split('.').last),
+                          );
+                        },
+                      ).toList(),
+                    );
+                  },
+                ),
+              ],
+            ),
+            isActive: _currentStep >= 3,
+          )
     ];
   }
 }
