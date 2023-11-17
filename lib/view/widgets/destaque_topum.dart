@@ -1,46 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/app_bar.dart';
 import 'package:mic_check_one_two/view/widgets/dialog_perfil_famoso.dart';
 import 'package:mic_check_one_two/view/widgets/prod_audio.dart';
 
-class DestaqueTopUmWidget extends StatefulWidget {
+class DestaqueTopUmWidget extends ConsumerStatefulWidget {
   const DestaqueTopUmWidget({super.key});
 
   @override
-  State<DestaqueTopUmWidget> createState() => _DestaqueTopUmWidgetState();
+  ConsumerState<DestaqueTopUmWidget> createState() => _DestaqueTopUmWidgetState();
 }
 
-class _DestaqueTopUmWidgetState extends State<DestaqueTopUmWidget> {
+class _DestaqueTopUmWidgetState extends ConsumerState<DestaqueTopUmWidget> {
  ThemeColors themeColors = ThemeColors();
 
   @override
   Widget build(BuildContext context) {
+
+    final musicaVM = ref.watch(MusicaViewModelProvider());
+    
+    return musicaVM.when(data: (data) {
+      return _cont();
+    }, error: (error, stackTrace) {
+      return Container();
+    }, loading: () {
+      return CircularProgressIndicator();
+    },);
+  }
+
+  Container _cont() {
     return Container(
-      padding: EdgeInsets.only(top:0, right: 20, left: 20, bottom: 0),
-      margin: EdgeInsets.only(top:5, right: 0, left: 0, bottom: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-         gradient: themeColors.gradient4,
-        boxShadow: [
-           BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 1,
-                  blurRadius: 2,
-                  offset: Offset(0, 3), // deslocação vertical e horizontal
-                ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          buildTopHeader(),
-          SizedBox(height: 10),
-          buildMusicInfo(),
-          //AudioPlayerUrl(),
-        ],
-      ),
-    );
+    padding: EdgeInsets.only(top:0, right: 20, left: 20, bottom: 0),
+    margin: EdgeInsets.only(top:5, right: 0, left: 0, bottom: 20),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+       gradient: themeColors.gradient4,
+      boxShadow: [
+         BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 3), // deslocação vertical e horizontal
+              ),
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        buildTopHeader(),
+        SizedBox(height: 10),
+        buildMusicInfo(),
+        //AudioPlayerUrl(),
+      ],
+    ),
+  );
   }
 
   Widget buildTopHeader() {

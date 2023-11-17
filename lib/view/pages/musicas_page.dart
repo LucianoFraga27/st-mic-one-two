@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mic_check_one_two/environment.dart';
 import 'package:mic_check_one_two/view/widgets/card_music.dart';
 import 'package:mic_check_one_two/view/widgets/destaque_widget.dart';
 import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 import 'package:mic_check_one_two/view/widgets/seguindo_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MusicasPage extends StatefulWidget {
   @override
@@ -13,11 +15,25 @@ class MusicasPage extends StatefulWidget {
 class _MusicasPageState extends State<MusicasPage> {
   PageController _pageController = PageController();
   int _currentPage = 0;
+  late SharedPreferences prefs;
+  var genero;
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+  @override
+  void initState() {
+    super.initState();
+    _carregarSharedPreferences();
+  }
+  Future<void> _carregarSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+    genero = prefs.getString(LocalStorageKeys.generoFavorito);
+    print("genero do usuario: $genero");
+  });
   }
 
   @override

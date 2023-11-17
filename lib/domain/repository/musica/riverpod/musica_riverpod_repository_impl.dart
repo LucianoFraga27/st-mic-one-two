@@ -66,7 +66,7 @@ class MusicaRiverpodRepositoryImpl implements MusicaRiverpodRepository {
   @override
   Future<List> pesquisarMusica(String pesquisa) async {
    try {
-      final Response(:data) = await restClient.auth.get('/v1/musica/pesquisa/$pesquisa');
+      final Response(:data) = await restClient.auth.get('/v1/musica/pesquisar/$pesquisa');
       print(data);
       return data;
     } on DioException catch (e) {

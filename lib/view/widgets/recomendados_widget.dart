@@ -1,55 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 
-class RecomendadosWidget extends StatefulWidget {
+class RecomendadosWidget extends ConsumerStatefulWidget {
   RecomendadosWidget({super.key});
 
   @override
-  State<RecomendadosWidget> createState() => _RecomendadosWidgetState();
+  ConsumerState<RecomendadosWidget> createState() => _RecomendadosWidgetState();
 }
 
-class _RecomendadosWidgetState extends State<RecomendadosWidget> {
+class _RecomendadosWidgetState extends ConsumerState<RecomendadosWidget> {
   ThemeColors themeColors = ThemeColors();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      // color: const Color.fromARGB(255, 255, 241, 240),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(right: 8.0, left: 15.0),
-            child: Text(
-              "Em alta",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 53, 53, 53)),
-            ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height / 4.5,
-            color: Colors.transparent,// Defina a altura desejada para a lista horizontal
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal, // Define o eixo horizontal
-              itemBuilder: (BuildContext context, int index) {
-                return _recomendadoWidget(context, index);
-              },
-              itemCount: 10,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(width: 0); // Espaçamento entre os itens
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+
+    final musicaVM = ref.watch(MusicaViewModelProvider());
+    
+    return musicaVM.when(data: (data) {
+      final MusicaViewState(:musicasTop) = data;
+      return _contain(context, musicasTop);
+    }, error: (error, stackTrace) {
+      return Container();
+    }, loading: () {
+      return Container(
+        height: 200,
+        child: Center(child: CircularProgressIndicator())
+      );
+    },);
+
+   
   }
 
-  Widget _recomendadoWidget(BuildContext context, int index) {
+  Container _contain(BuildContext context,musicasTop) {
+    List<dynamic> musicas = musicasTop;
+    return Container(
+    width: MediaQuery.of(context).size.width,
+    // color: const Color.fromARGB(255, 255, 241, 240),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(right: 8.0, left: 15.0),
+          child: Text(
+            "Em alta",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Color.fromARGB(255, 53, 53, 53)),
+          ),
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height / 4.5,
+          color: Colors.transparent,// Defina a altura desejada para a lista horizontal
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal, // Define o eixo horizontal
+            itemBuilder: (BuildContext context, int index) {
+              return _recomendadoWidget(context, index, musicas);
+            },
+            itemCount: musicas.length,
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(width: 0); // Espaçamento entre os itens
+            },
+          ),
+        ),
+      ],
+    ),
+  );
+  }
+
+  Widget _recomendadoWidget(BuildContext context, int index, musicas) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
       child: Column(
@@ -97,8 +119,8 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.asset(
-                                      "assets/capa_music.png",
+                                    child: Image.network(
+                                     musicas[index]['capa'],
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -106,10 +128,10 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                           ),
                           const SizedBox(height: 5),
                           RichText(
-                            text: const TextSpan(
+                            text:  TextSpan(
                               children: [
                                 TextSpan(
-                                  text: "2P - ",
+                                  text: musicas[index]['autor']['username'],
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -117,7 +139,7 @@ class _RecomendadosWidgetState extends State<RecomendadosWidget> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: "De Manhã",
+                                  text: musicas[index]['titulo'],
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,

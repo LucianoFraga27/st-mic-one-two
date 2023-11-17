@@ -13,7 +13,7 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  final userNameController = TextEditingController(text: "lucas@email.com");
+  final userNameController = TextEditingController(text: "a@email.com");
 
   final userPasswordController = TextEditingController(text: "12345");
   late SharedPreferences sp;

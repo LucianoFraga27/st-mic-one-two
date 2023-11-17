@@ -6,7 +6,7 @@ part of 'login_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$usuarioVmHash() => r'd8a4ec26accafa4a4b3b03064bd6dc6bf926d12e';
+String _$usuarioVmHash() => r'37b0bc23154efe6a8de1ed4c8c1207069136f617';
 
 /// Copied from Dart SDK
 class _SystemHash {
