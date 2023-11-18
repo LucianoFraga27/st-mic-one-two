@@ -85,7 +85,8 @@ class SeguindoWidget extends StatelessWidget {
                            onPressed: () {
                             Navigator.push(context, 
                             MaterialPageRoute(
-                            builder: (context) => MusicDialog(),
+                            builder: (context) => Container(),
+                            // -------- musicawidget
                           ),);
                           },
                         ),

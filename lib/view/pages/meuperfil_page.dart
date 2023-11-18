@@ -8,6 +8,7 @@ class MeuPerfilPage extends StatefulWidget {
   final String genero;
   final int seguidores;
   final int seguindo;
+  final String id;
   MeuPerfilPage({
     required this.nome,
     required this.email,
@@ -15,17 +16,19 @@ class MeuPerfilPage extends StatefulWidget {
     required this.genero,
     required this.seguidores,
     required this.seguindo,
+    required this.id,
     Key? key,
   }) : super(key: key);
 
   @override
-  _MeuPerfilPageState createState() => _MeuPerfilPageState(email: email, foto: foto, nome: nome, genero: genero, seguidores: seguidores, seguindo: seguindo);
+  _MeuPerfilPageState createState() => _MeuPerfilPageState(id: id,email: email, foto: foto, nome: nome, genero: genero, seguidores: seguidores, seguindo: seguindo);
 }
 
 class _MeuPerfilPageState extends State<MeuPerfilPage> {
   
-_MeuPerfilPageState({this.nome, this.email, this.foto, this.genero, this.seguidores, this.seguindo});
+_MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.genero, this.seguidores, this.seguindo});
 
+  String id;
   String? nome;
   String? email;
   String? foto;
@@ -38,73 +41,75 @@ _MeuPerfilPageState({this.nome, this.email, this.foto, this.genero, this.seguido
   @override
   Widget build(BuildContext context) {
     print(nome.toString());
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 20),
-          CircleAvatar(
-            radius: 80,
-            backgroundImage: NetworkImage(
-                foto.toString()),
-          ),
-          SizedBox(height: 20),
-          Text(
-            nome.toString(),
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 20),
+            CircleAvatar(
+              radius: 80,
+              backgroundImage: NetworkImage(
+                  foto.toString()),
             ),
-          ),
-          Text(
-            email.toString(),
-            style: TextStyle(
-              fontSize: 18,
+            SizedBox(height: 20),
+            Text(
+              nome.toString(),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          
-          SizedBox(height: 20),
-          _infos(),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(width: 20),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      exibirGrafico = false;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // Cor de fundo transparente
-                    onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
-                  ),
-                  child: Text('Minhas Faixas'),
-                ),
+            Text(
+              email.toString(),
+              style: TextStyle(
+                fontSize: 18,
               ),
-              SizedBox(width: 20),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      exibirGrafico = true;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // Cor de fundo transparente
-                    onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
+            ),
+            
+            SizedBox(height: 20),
+            _infos(),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        exibirGrafico = false;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // Cor de fundo transparente
+                      onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
+                    ),
+                    child: Text('Minhas Faixas'),
                   ),
-                  child: Text('Popularidade'),
                 ),
-              ),
-              SizedBox(width: 20),
-            ],
-          ),
-          SizedBox(height: 20),
-          exibirGrafico ? _exibirGrafico() : _minhasFaixas(),
-        ],
+                SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        exibirGrafico = true;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // Cor de fundo transparente
+                      onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
+                    ),
+                    child: Text('Popularidade'),
+                  ),
+                ),
+                SizedBox(width: 20),
+              ],
+            ),
+            SizedBox(height: 20),
+            exibirGrafico ? _exibirGrafico() : _minhasFaixas(id),
+          ],
+        ),
       ),
     );
   }
@@ -193,8 +198,8 @@ _MeuPerfilPageState({this.nome, this.email, this.foto, this.genero, this.seguido
     );
   }
 
-  Widget _minhasFaixas() {
+  Widget _minhasFaixas(id) {
     // Lógica para exibir o gráfico aqui
-    return MinhaFaixaWidget();
+    return MinhaFaixaWidget(id: id,);
   }
 }

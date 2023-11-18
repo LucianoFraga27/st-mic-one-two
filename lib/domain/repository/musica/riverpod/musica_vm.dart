@@ -53,11 +53,11 @@ class MusicaViewModel extends _$MusicaViewModel {
       {int? id, int? idUsuario, String? pesquisa}) async {
     state = const AsyncValue.loading();
 
-    if (id == null && idUsuario == null && pesquisa == null) {
-      final musica = [];
+   
+      final musica = await _listarMusicasTop();
       final musicasDoGenero = await _listarByGenero();
-      final musicasDoUsuario = [];
-      final musicasPesquisa = [];
+      final musicasDoUsuario = await _listarMusicasDoUsuario(idUsuario ?? 1);
+      final musicasPesquisa =  await _pesquisarMusica(pesquisa ?? "");
       final musicasTop = await _listarMusicasTop();
 
       return MusicaViewState(
@@ -66,47 +66,6 @@ class MusicaViewModel extends _$MusicaViewModel {
           musicasDoUsuario: musicasDoUsuario,
           musicasPesquisa: musicasPesquisa,
           musicasTop: musicasTop);
-    }
-    if (id != null && idUsuario == null && pesquisa == null) {
-      final musica = await _encontrarMusicaPeloId(id);
-      final musicasDoGenero = [];
-      final musicasDoUsuario = [];
-      final musicasPesquisa = [];
-      final musicasTop = [];
-
-      return MusicaViewState(
-          musica: musica,
-          musicasDoGenero: musicasDoGenero,
-          musicasDoUsuario: musicasDoUsuario,
-          musicasPesquisa: musicasPesquisa,
-          musicasTop: musicasTop);
-    }
-    if (id != null && idUsuario != null && pesquisa == null) {
-      final musica = [];
-      final musicasDoGenero = [];
-      final musicasDoUsuario = await _listarMusicasDoUsuario(idUsuario);
-      final musicasPesquisa = [];
-      final musicasTop = [];
-
-      return MusicaViewState(
-          musica: musica,
-          musicasDoGenero: musicasDoGenero,
-          musicasDoUsuario: musicasDoUsuario,
-          musicasPesquisa: musicasPesquisa,
-          musicasTop: musicasTop);
-    } else {
-      final musica = [];
-      final musicasDoGenero = [];
-      final musicasDoUsuario = [];
-      final musicasPesquisa = await _pesquisarMusica(pesquisa ?? "");
-      final musicasTop = [];
-
-      return MusicaViewState(
-          musica: musica,
-          musicasDoGenero: musicasDoGenero,
-          musicasDoUsuario: musicasDoUsuario,
-          musicasPesquisa: musicasPesquisa,
-          musicasTop: musicasTop);
-    }
-  }
+    
+      }
 }

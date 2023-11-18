@@ -22,6 +22,7 @@ class _RecomendadosWidgetState extends ConsumerState<RecomendadosWidget> {
       final MusicaViewState(:musicasTop) = data;
       return _contain(context, musicasTop);
     }, error: (error, stackTrace) {
+      
       return Container();
     }, loading: () {
       return Container(
@@ -131,7 +132,7 @@ class _RecomendadosWidgetState extends ConsumerState<RecomendadosWidget> {
                             text:  TextSpan(
                               children: [
                                 TextSpan(
-                                  text: musicas[index]['autor']['username'],
+                                  text: musicas[index]['autor']['username'] + " - ",
                                   style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,

@@ -2,13 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:mic_check_one_two/view/widgets/prod_audio.dart';
 
 class MusicDialog extends StatefulWidget {
+  MusicDialog({required this.audio, required this.autor, required this.autorId, required this.capa, required this.musicaId, required this.titulo});
+  String musicaId;
+  String titulo;
+  String autorId;
+  String autor;
+  String capa;
+  String audio;
   @override
-  _MusicDialogState createState() => _MusicDialogState();
+  _MusicDialogState createState() => _MusicDialogState(audio: audio, musicaId:  musicaId, autor: autor, autorId: autorId, capa: capa, titulo: titulo);
 }
 
 class _MusicDialogState extends State<MusicDialog> with WidgetsBindingObserver {
+  _MusicDialogState({required this.audio, required this.autor, required this.autorId, required this.capa, required this.musicaId, required this.titulo});
+  
   bool isPlaying = false;
   bool isFavorite = false;
+  
+  String musicaId;
+  String titulo;
+  String autorId;
+  String autor;
+  String capa;
+  String audio;
 
 
   void togglePlay() {
@@ -74,8 +90,8 @@ class _MusicDialogState extends State<MusicDialog> with WidgetsBindingObserver {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(14),
-                        child: Image.asset(
-                        'assets/capa_music.png', // Substitua pelo caminho da capa da música
+                        child: Image.network(
+                        capa, // Substitua pelo caminho da capa da música
                         width: 200,
                         height: 200,
                         fit: BoxFit.cover,
@@ -85,7 +101,7 @@ class _MusicDialogState extends State<MusicDialog> with WidgetsBindingObserver {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    'De Manhã',
+                    titulo,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -93,14 +109,16 @@ class _MusicDialogState extends State<MusicDialog> with WidgetsBindingObserver {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    '2P',
+                    autor,
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   
                   SizedBox(height: 0),
-                  AudioPlayerUrl()
+                  AudioPlayerUrl(
+                    url: audio,
+                  )
                 ],
               ),
             ),

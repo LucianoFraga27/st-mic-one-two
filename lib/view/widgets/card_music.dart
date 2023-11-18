@@ -129,7 +129,7 @@ class _CardMusicaState extends State<CardMusica> {
                           //   },
                           // );
                         Navigator.of(context).push(MaterialPageRoute(
-builder: (context) => AudioPlayerUrl(),
+                            builder: (context) => Container(),
 ));
                         },
                         icon: const Icon(

@@ -150,7 +150,8 @@ class _CurtidasWidgetState extends State<CurtidasWidget> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return MusicDialog(); // Chama o MusicDialog() dentro do showDialog
+                                              // return MusicDialog(); // Chama o MusicDialog() dentro do showDialog
+                                              return Container();
                                             },
                                           );
                                         },

@@ -64,7 +64,7 @@ class _ModalPageState extends ConsumerState<ModalPage> {
               const HomePage(),
               MusicasPage(),
               PesquisaMusicaPage(),
-              MeuPerfilPage(nome:usuario['username'], email: usuario['email'], foto: usuario['fotoPerfil'], genero: usuario['generoFavorito'] ?? "", seguidores:  usuario['seguidoresCount'], seguindo: usuario['seguindoCount'])
+              MeuPerfilPage(id:usuario["id"].toString(),nome:usuario['username'], email: usuario['email'], foto: usuario['fotoPerfil'], genero: usuario['generoFavorito'] ?? "", seguidores:  usuario['seguidoresCount'], seguindo: usuario['seguindoCount'])
             ];
             Widget _home() {
               return pages.elementAt(_selectedIndex);

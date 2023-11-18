@@ -88,7 +88,8 @@ class _DestaqueWidgetState extends ConsumerState<DestaqueWidget> {
                             showDialog(
                               context: context,
                               builder: (context) {
-                                return MusicDialog();
+                                // return MusicDialog();
+                                return Container();
                               },
                             );
                           },

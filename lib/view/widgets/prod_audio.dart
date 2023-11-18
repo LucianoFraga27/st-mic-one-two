@@ -2,16 +2,18 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class AudioPlayerUrl extends StatefulWidget {
+  AudioPlayerUrl({required this.url});
+   String url;
   @override
-  _AudioPlayerUrlState createState() => _AudioPlayerUrlState();
+  _AudioPlayerUrlState createState() => _AudioPlayerUrlState(url: url);
 }
 
 class _AudioPlayerUrlState extends State<AudioPlayerUrl> {
- 
+  _AudioPlayerUrlState({required this.url});
   AudioPlayer audioPlayer = AudioPlayer();
   PlayerState audioPlayerState = PlayerState.paused;
-  String url =
-      "https://onetwo-arquivos-estudo.s3.us-east-2.amazonaws.com/catalogo/29a76bd9-a6e2-4f41-be13-73e338d01d06_2P+calli.+V%C3%A1rias+T%C3%A1ticas+MASTER+V1.mp3";
+  String url;
+      
 
   int timeProgress = 0;
   int audioDuration = 0;

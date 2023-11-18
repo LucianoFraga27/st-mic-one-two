@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -21,7 +22,7 @@ class _MusicaUploadPageState extends State<MusicaUploadPage> {
   GeneroMusical selectedGenero = GeneroMusical.ALTERNATIVE;
   File? audioFile;
    late MusicaAddRepository musicaAddRepository;
-
+   bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -46,278 +47,315 @@ class _MusicaUploadPageState extends State<MusicaUploadPage> {
       appBar: AppBar(
         title: Text('Upload de Música'),
       ),
-      body: Stepper(
-        currentStep: _currentStep,
-        onStepTapped: (step) {
-          setState(() {
-            _currentStep = step;
-          });
-        },
-        onStepCancel: () {
-          if (_currentStep > 0) {
-            setState(() {
-              _currentStep -= 1;
-            });
-          }
-        },
-        onStepContinue: () async {
-          if (_currentStep < 3) {
-            if (_currentStep == 0) {
-              if (tituloController.text.isEmpty) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Erro'),
-                      content: Text('Por favor, informe o título da música.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
+      body: Stack(
+        children: [
+          Stepper(
+            currentStep: _currentStep,
+            onStepTapped: (step) {
+              setState(() {
+                _currentStep = step;
+              });
+            },
+            onStepCancel: () {
+              if (_currentStep > 0) {
                 setState(() {
-                  _currentStep += 1;
+                  _currentStep -= 1;
                 });
               }
-            } else if (_currentStep == 1) {
-              if (_selectedImage == null || _selectedImage!.path.isEmpty) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Erro'),
-                      content:
-                          Text('Por favor, selecione uma capa para a música.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                setState(() {
-                  _currentStep += 1;
-                });
-              }
-            } else if (_currentStep == 2) {
-              if (audioFile == null || audioFile!.path.isEmpty) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Erro'),
-                      content: Text(
-                          'Por favor, selecione um arquivo de áudio para a música.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                setState(() {
-                  _currentStep += 1;
-                });
-              }
-            } else if (_currentStep == 3) {
-              if (selectedGenero == null) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Erro'),
-                      content: Text('Por favor, selecione o gênero da música.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                setState(() {
-                  _currentStep += 1;
-                });
-              }
-            }
-          } else {
-            print("Conclui cadastro");
-            bool result = await musicaAddRepository.adicionarMusica(tituloController.text,
-      audioFile!,
-      _selectedImage!,
-      selectedGenero);
-
-          if (result == true) {
-            print("Conclui cadastro");
-          } else {
-            print("mão Conclui cadastro");
-          }
-
-          }
-        },
-        steps: [
-          Step(
-            title: Text('Título da Música'),
-            content: TextFormField(
-              controller: tituloController,
-              decoration:
-                  InputDecoration(labelText: 'Informe o título da música'),
-            ),
-            isActive: _currentStep >= 0,
-          ),
-          Step(
-            title: Text('Capa da Música'),
-            content: Column(
-              children: <Widget>[
-                Text(
-                  'Escolha a capa da música',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                GestureDetector(
-                  onTap: _pickImage,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue,
-                            width: 3,
-                          ),
-                        ),
-                        child: _selectedImage != null
-                            ? ClipRect(
-                                child: Image.file(
-                                  File(_selectedImage!.path),
-                                  width: 120,
-                                  height: 120,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : Icon(
-                                Icons.camera_alt,
-                                size: 40,
-                                color: Colors.grey,
-                              ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            isActive: _currentStep >= 1,
-          ),
-          Step(
-            title: Text('Áudio MP3 da Música'),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [ 
-                Text(
-                  'Aqui você pode fazer o upload do áudio em MP3 da música.',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(height: 10),
-                audioFile != null
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Arquivo selecionado:',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            audioFile!.path.split('/').last,
-                            // Exibe apenas o nome do arquivo, removendo o caminho
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(height: 10),
-                        ],
-                      )
-                    : ElevatedButton(
-                        onPressed: () async {
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles(
-                            type: FileType.custom,
-                            allowedExtensions: ['mp3'],
-                          );
-
-                          if (result != null) {
-                            print(
-                                'Arquivo selecionado: ${result.files.single.name}');
-                            setState(() {
-                              audioFile = File(result.files.single.path ?? "");
-                            });
-                          } else {
-                            print('Nenhum arquivo selecionado');
-                          }
-                        },
-                        child: Text('Selecionar Áudio MP3 da Música'),
-                      ),
-              ],
-            ),
-            isActive: _currentStep >= 2,
-          ),
-          Step(
-            title: Text('Gênero da Música'),
-            content: Column(
-              children: [
-                Text(
-                  'Selecione o Gênero da Música',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
-                    return DropdownButton<GeneroMusical>(
-                      value: selectedGenero ?? GeneroMusical.ALTERNATIVE,
-                      onChanged: (GeneroMusical? newValue) {
-                        setState(() {
-                          selectedGenero = newValue ?? GeneroMusical.ALTERNATIVE;
-                        });
+            },
+            onStepContinue: () async {
+              if (_currentStep < 3) {
+                if (_currentStep == 0) {
+                  if (tituloController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Erro'),
+                          content: Text('Por favor, informe o título da música.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
                       },
-                      items: GeneroMusical.values
-                          .map<DropdownMenuItem<GeneroMusical>>(
-                        (GeneroMusical value) {
-                          
-                          return DropdownMenuItem<GeneroMusical>(
-                            value: value,
-                            child: Text(value.toString().split('.').last),
-                          );
-                        },
-                      ).toList(),
                     );
-                  },
+                  } else {
+                    setState(() {
+                      _currentStep += 1;
+                    });
+                  }
+                } else if (_currentStep == 1) {
+                  if (_selectedImage == null || _selectedImage!.path.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Erro'),
+                          content:
+                              Text('Por favor, selecione uma capa para a música.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    setState(() {
+                      _currentStep += 1;
+                    });
+                  }
+                } else if (_currentStep == 2) {
+                  if (audioFile == null || audioFile!.path.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Erro'),
+                          content: Text(
+                              'Por favor, selecione um arquivo de áudio para a música.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    setState(() {
+                      _currentStep += 1;
+                    });
+                  }
+                } else if (_currentStep == 3) {
+                  if (selectedGenero == null) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Erro'),
+                          content: Text('Por favor, selecione o gênero da música.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    setState(() {
+                      _currentStep += 1;
+                    });
+                  }
+                }
+              } else {
+                setState(() {
+                  _isLoading = true;
+                });
+                print("Conclui cadastro");
+                
+                
+                bool result = await musicaAddRepository.adicionarMusica(tituloController.text,
+          audioFile!,
+          _selectedImage!,
+          selectedGenero);
+              
+
+              if (result == true) {
+               showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Sucesso'),
+                          content: Text('Musica cadastrada com sucesso.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                               Navigator.of(context)
+                .pushNamedAndRemoveUntil('/home', (route) => false);
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+               
+              } else {
+                print("mão Conclui cadastro");
+              }
+              setState(() {
+            _isLoading = false; // Desativa o indicador de carregamento
+  });
+              }
+            },
+            steps: [
+              Step(
+                title: Text('Título da Música'),
+                content: TextFormField(
+                  controller: tituloController,
+                  decoration:
+                      InputDecoration(labelText: 'Informe o título da música'),
                 ),
-              ],
+                isActive: _currentStep >= 0,
+              ),
+              Step(
+                title: Text('Capa da Música'),
+                content: Column(
+                  children: <Widget>[
+                    Text(
+                      'Escolha a capa da música',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: 120,
+                            height: 120,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 3,
+                              ),
+                            ),
+                            child: _selectedImage != null
+                                ? ClipRect(
+                                    child: Image.file(
+                                      File(_selectedImage!.path),
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Icon(
+                                    Icons.camera_alt,
+                                    size: 40,
+                                    color: Colors.grey,
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                isActive: _currentStep >= 1,
+              ),
+              Step(
+                title: Text('Áudio MP3 da Música'),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [ 
+                    Text(
+                      'Aqui você pode fazer o upload do áudio em MP3 da música.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 10),
+                    audioFile != null
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Arquivo selecionado:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                audioFile!.path.split('/').last,
+                                // Exibe apenas o nome do arquivo, removendo o caminho
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(height: 10),
+                            ],
+                          )
+                        : ElevatedButton(
+                            onPressed: () async {
+                              FilePickerResult? result =
+                                  await FilePicker.platform.pickFiles(
+                                type: FileType.custom,
+                                allowedExtensions: ['mp3'],
+                              );
+
+                              if (result != null) {
+                                print(
+                                    'Arquivo selecionado: ${result.files.single.name}');
+                                setState(() {
+                                  audioFile = File(result.files.single.path ?? "");
+                                });
+                              } else {
+                                print('Nenhum arquivo selecionado');
+                              }
+                            },
+                            child: Text('Selecionar Áudio MP3 da Música'),
+                          ),
+                  ],
+                ),
+                isActive: _currentStep >= 2,
+              ),
+              Step(
+                title: Text('Gênero da Música'),
+                content: Column(
+                  children: [
+                    Text(
+                      'Selecione o Gênero da Música',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return DropdownButton<GeneroMusical>(
+                          value: selectedGenero ?? GeneroMusical.ALTERNATIVE,
+                          onChanged: (GeneroMusical? newValue) {
+                            setState(() {
+                              selectedGenero = newValue ?? GeneroMusical.ALTERNATIVE;
+                            });
+                          },
+                          items: GeneroMusical.values
+                              .map<DropdownMenuItem<GeneroMusical>>(
+                            (GeneroMusical value) {
+                              
+                              return DropdownMenuItem<GeneroMusical>(
+                                value: value,
+                                child: Text(value.toString().split('.').last),
+                              );
+                            },
+                          ).toList(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                isActive: _currentStep >= 3,
+              )
+            ],
+          ),
+           if (_isLoading)
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
-            isActive: _currentStep >= 3,
-          )
         ],
       ),
     );
