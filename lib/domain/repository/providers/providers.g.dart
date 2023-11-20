@@ -102,5 +102,21 @@ final curtidaOuNaoRepositoryProvider =
 );
 
 typedef CurtidaOuNaoRepositoryRef = ProviderRef<CurtidaOuNaoRepository>;
+String _$seguirRepositoryRepositoryHash() =>
+    r'5d1074af16b444cffbcbbf05dca0c46c548625c5';
+
+/// See also [seguirRepositoryRepository].
+@ProviderFor(seguirRepositoryRepository)
+final seguirRepositoryRepositoryProvider = Provider<SeguirRepository>.internal(
+  seguirRepositoryRepository,
+  name: r'seguirRepositoryRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$seguirRepositoryRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SeguirRepositoryRepositoryRef = ProviderRef<SeguirRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
