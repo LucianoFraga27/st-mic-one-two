@@ -47,7 +47,7 @@ class _MusicDialogState extends State<MusicDialog> with WidgetsBindingObserver {
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration (
-          gradient: ThemeColors().brancoBar
+         
         ),
         )
       ),

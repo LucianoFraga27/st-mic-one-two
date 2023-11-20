@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/vm/listar_curtidas_vm.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/vm/login_state.dart';
+import 'package:mic_check_one_two/environment.dart';
 import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PerfilDoUsuarioPage extends ConsumerStatefulWidget {
   
@@ -23,9 +25,25 @@ class _MeuPerfilPageState extends  ConsumerState<PerfilDoUsuarioPage> {
   _MeuPerfilPageState({required this.id});
    int id;
   
-
+  bool seguindo_usuario = false;
+  int seguidoresDoUsuario = 0;
   bool exibirGrafico = false;
-  
+  int click = 0;
+  String meu_id = "1";
+  late SharedPreferences sp;
+
+  init () async  {
+     sp = await SharedPreferences.getInstance();
+     meu_id = sp.getString(LocalStorageKeys.idUsuario).toString();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   
+  }
+
   @override
   Widget build(BuildContext context) {
     final usuarioVM = ref.watch(UsuarioVmProvider(id: id.toString()));
@@ -42,6 +60,11 @@ class _MeuPerfilPageState extends  ConsumerState<PerfilDoUsuarioPage> {
   }
 
   Center _body(String nome, String email, String capa, int seguidores, int seguindo) {
+    setState(() {
+     if ( click == 0) {
+      seguidoresDoUsuario = seguidores;
+     }
+    });
     return Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +120,6 @@ class _MeuPerfilPageState extends  ConsumerState<PerfilDoUsuarioPage> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      // Cor de fundo transparente
                       onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                     ),
                     child: Text('Curtidas'),
@@ -117,9 +139,29 @@ class _MeuPerfilPageState extends  ConsumerState<PerfilDoUsuarioPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        if (meu_id != id.toString()) ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        click++;
+                        seguindo_usuario = !seguindo_usuario;
+                        if(seguindo_usuario == true) {
+                          seguidoresDoUsuario += 1;
+                        } else {
+                          seguidoresDoUsuario -= 1;
+                        }
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // Cor de fundo transparente
+                      onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
+                    ),
+                    child: Text(seguindo_usuario ? 'Seguindo' : 'Seguir'),
+                  ),
+        
         SizedBox(width: 20),
         Column(
           children: [
+            
             Text(
               'Seguidores',
               style: TextStyle(
@@ -127,7 +169,7 @@ class _MeuPerfilPageState extends  ConsumerState<PerfilDoUsuarioPage> {
               ),
             ),
             Text(
-              '$seguidores'.toString(),
+              seguidoresDoUsuario.toString(),
               style: TextStyle(
                 fontSize: 18,
               ),
