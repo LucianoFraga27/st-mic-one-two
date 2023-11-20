@@ -67,5 +67,40 @@ final musicaRiverpodRepositoryProvider =
 );
 
 typedef MusicaRiverpodRepositoryRef = ProviderRef<MusicaRiverpodRepository>;
+String _$listarMusicasCurtidasRepositoryHash() =>
+    r'e334b84c95f3bb186b91fb6ac1d8bb2d4bd58182';
+
+/// See also [listarMusicasCurtidasRepository].
+@ProviderFor(listarMusicasCurtidasRepository)
+final listarMusicasCurtidasRepositoryProvider =
+    Provider<ListarMusicasCurtidasRepository>.internal(
+  listarMusicasCurtidasRepository,
+  name: r'listarMusicasCurtidasRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$listarMusicasCurtidasRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ListarMusicasCurtidasRepositoryRef
+    = ProviderRef<ListarMusicasCurtidasRepository>;
+String _$curtidaOuNaoRepositoryHash() =>
+    r'a39f3b02f1899f7f0172ed8be05bed79deece6e7';
+
+/// See also [curtidaOuNaoRepository].
+@ProviderFor(curtidaOuNaoRepository)
+final curtidaOuNaoRepositoryProvider =
+    Provider<CurtidaOuNaoRepository>.internal(
+  curtidaOuNaoRepository,
+  name: r'curtidaOuNaoRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$curtidaOuNaoRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef CurtidaOuNaoRepositoryRef = ProviderRef<CurtidaOuNaoRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

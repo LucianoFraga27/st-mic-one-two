@@ -10,6 +10,7 @@ class MinhaFaixaWidget extends ConsumerWidget {
   ThemeColors themeColors = ThemeColors();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print("id do usuario $id");
     final musicaVM =
         ref.watch(MusicaViewModelProvider(idUsuario: int.tryParse(id)));
     return SingleChildScrollView(
@@ -41,7 +42,7 @@ class MinhaFaixaWidget extends ConsumerWidget {
             },
           );
         },
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255))),
         error: (e, s) {
           print(e);
           return Text("erro");

@@ -13,9 +13,9 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  final userNameController = TextEditingController(text: "a@email.com");
+  final userNameController = TextEditingController(text: "lucas@email.com");
 
-  final userPasswordController = TextEditingController(text: "12345");
+  final userPasswordController = TextEditingController(text: "123");
   late SharedPreferences sp;
   late LoginRepositoryTemp loginRepository;
 
@@ -35,7 +35,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       body: Container(
          height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          gradient: themeColors.login
+          gradient: themeColors.brancoBar
           
         ),
         child: SingleChildScrollView(
@@ -91,7 +91,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           height: 100,
                           child: Center(
                             child:
-                                CircularProgressIndicator(), // Indicador de carregamento
+                                CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)), // Indicador de carregamento
                           ),
                         );
                       },

@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          gradient: themeColors.login
+          gradient: themeColors.brancoBar
           
         ),
         child: SingleChildScrollView(
@@ -105,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 100,
                           child: Center(
                             child:
-                                CircularProgressIndicator(), // Indicador de carregamento
+                                CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)), // Indicador de carregamento
                           ),
                         );
                       },

@@ -27,7 +27,7 @@ class _RecomendadosWidgetState extends ConsumerState<RecomendadosWidget> {
     }, loading: () {
       return Container(
         height: 200,
-        child: Center(child: CircularProgressIndicator())
+        child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)))
       );
     },);
 
@@ -73,6 +73,7 @@ class _RecomendadosWidgetState extends ConsumerState<RecomendadosWidget> {
   }
 
   Widget _recomendadoWidget(BuildContext context, int index, musicas) {
+    print( "autor: "+ musicas[index]['autor']['username']);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
       child: Column(

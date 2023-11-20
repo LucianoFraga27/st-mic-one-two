@@ -353,7 +353,7 @@ class _MusicaUploadPageState extends State<MusicaUploadPage> {
             Container(
               color: Colors.black.withOpacity(0.5),
               child: Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)),
               ),
             ),
         ],

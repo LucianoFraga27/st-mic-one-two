@@ -1,52 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/vm/listar_curtidas_vm.dart';
+import 'package:mic_check_one_two/domain/repository/usuario/riverpod/vm/login_state.dart';
 import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
+import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 
-import '../widgets/paravoce_widget.dart';
-
-class MeuPerfilPage extends ConsumerStatefulWidget {
-  final String nome;
-  final String email;
-  final String foto;
-  final String genero;
-  final int seguidores;
-  final int seguindo;
-  final String id;
-  MeuPerfilPage({
-    required this.nome,
-    required this.email,
-    required this.foto,
-    required this.genero,
-    required this.seguidores,
-    required this.seguindo,
+class PerfilDoUsuarioPage extends ConsumerStatefulWidget {
+  
+  int id;
+ 
+  PerfilDoUsuarioPage({
     required this.id,
     Key? key,
   }) : super(key: key);
 
   @override
- ConsumerState<MeuPerfilPage>  createState() => _MeuPerfilPageState(id: id,email: email, foto: foto, nome: nome, genero: genero, seguidores: seguidores, seguindo: seguindo);
+ ConsumerState<PerfilDoUsuarioPage> createState() => _MeuPerfilPageState(id:id);
 }
 
-class _MeuPerfilPageState extends ConsumerState<MeuPerfilPage> {
+class _MeuPerfilPageState extends  ConsumerState<PerfilDoUsuarioPage> {
   
-_MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.genero, this.seguidores, this.seguindo});
+  _MeuPerfilPageState({required this.id});
+   int id;
+  
 
-  String id;
-  String? nome;
-  String? email;
-  String? foto;
-  String? genero;
-  int? seguidores;
-  int? seguindo;
-  
   bool exibirGrafico = false;
   
   @override
   Widget build(BuildContext context) {
-    print(nome.toString());
-    return SingleChildScrollView(
-      child: Center(
+    final usuarioVM = ref.watch(UsuarioVmProvider(id: id.toString()));
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: usuarioVM.when(data: (data) {
+          final UsuarioState(:usuario) = data;
+          return _body(usuario['username'], usuario['email'], usuario['fotoPerfil'], usuario['seguidoresCount'], usuario['seguindoCount']);
+        },
+         error: (error, stackTrace) => Container(), loading: () => CircularProgressIndicator(),)
+      ),
+    );
+  }
+
+  Center _body(String nome, String email, String capa, int seguidores, int seguindo) {
+    return Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -54,25 +50,25 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
             CircleAvatar(
               radius: 80,
               backgroundImage: NetworkImage(
-                  foto.toString()),
+                  capa),
             ),
             SizedBox(height: 20),
             Text(
-              nome.toString(),
+              '$nome',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              email.toString(),
+              '$email',
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
             
             SizedBox(height: 20),
-            _infos(),
+            _infos(seguidores, seguindo),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +85,7 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
                       // Cor de fundo transparente
                       onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                     ),
-                    child: Text('Minhas Faixas'),
+                    child: Text('Faixas'),
                   ),
                 ),
                 SizedBox(width: 20),
@@ -114,30 +110,13 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
             exibirGrafico ? _exibirGrafico() : _minhasFaixas(id),
           ],
         ),
-      ),
-    );
+      );
   }
 
-  Row _infos() {
+  Row _infos(seguidores, seguindo) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Column(
-        //   children: [
-        //     Text(
-        //       'Faixas',
-        //       style: TextStyle(
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //     Text(
-        //       '13',
-        //       style: TextStyle(
-        //         fontSize: 18,
-        //       ),
-        //     ),
-        //   ],
-        // ),
         SizedBox(width: 20),
         Column(
           children: [
@@ -148,7 +127,7 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
               ),
             ),
             Text(
-              seguidores.toString(),
+              '$seguidores'.toString(),
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -165,7 +144,7 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
               ),
             ),
             Text(
-              seguindo.toString(),
+              '$seguindo'.toString(),
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -208,6 +187,6 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
 
   Widget _minhasFaixas(id) {
     // Lógica para exibir o gráfico aqui
-    return MinhaFaixaWidget(id: id,);
+    return MinhaFaixaWidget(id: id.toString(),);
   }
 }

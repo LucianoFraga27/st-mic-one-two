@@ -26,7 +26,7 @@ class _DestaqueTopUmWidgetState extends ConsumerState<DestaqueTopUmWidget> {
     }, error: (error, stackTrace) {
       return Container();
     }, loading: () {
-      return CircularProgressIndicator();
+      return CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255));
     },);
   }
 

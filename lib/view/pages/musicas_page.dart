@@ -93,7 +93,7 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
               SingleChildScrollView(child: musicaVM.when(data: (data) {
                  final MusicaViewState(:musicasDoGenero) = data;
                  return _paravoce(musicasDoGenero);
-                 }, error: (error, stackTrace) => Text("Ocorreu um erro"), loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator() )))),
+                 }, error: (error, stackTrace) => Text("Ocorreu um erro"), loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)) )))),
             ],
           ),
         ),

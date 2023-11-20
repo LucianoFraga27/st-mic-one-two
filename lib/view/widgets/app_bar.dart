@@ -37,9 +37,10 @@ AppBar customAppBar(BuildContext context) {
       ),
     ],
     flexibleSpace: Container(
-      decoration: BoxDecoration(
-      ),
-    ),
+          decoration: BoxDecoration (
+          gradient: ThemeColors().brancoBar
+        ),
+        )
   );
 }
 

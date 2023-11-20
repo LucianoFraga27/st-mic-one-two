@@ -31,6 +31,27 @@ class ThemeColors {
     ], // Cores do gradiente
   );
 
+   var branco = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Colors.white,
+      Colors.grey[300]!,
+      const Color.fromARGB(255, 242, 172, 255)
+    ], // Cores do gradiente
+  );
+
+  var brancoBar = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      
+      Color.fromARGB(255, 248, 211, 255),
+      Colors.grey[100]!,
+      Colors.white,
+    ], // Cores do gradiente
+  );
+
   var gradient2 = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

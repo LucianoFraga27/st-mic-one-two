@@ -25,7 +25,7 @@ class _PesquisaMusicaPageState extends ConsumerState<PesquisaMusicaPage> {
                    final MusicaViewState(:musicasPesquisa) = data;
                    return _paravoce(musicasPesquisa);
                    }, error: (error, stackTrace) => Text("Ocorreu um erro"),
-                    loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator() )))
+                    loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)) )))
           ],
         ),
       ),
