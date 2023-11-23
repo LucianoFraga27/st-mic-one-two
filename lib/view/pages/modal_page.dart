@@ -50,6 +50,11 @@ class _ModalPageState extends ConsumerState<ModalPage> {
     prefs.setString(LocalStorageKeys.generoFavorito, genero);
   }
 
+
+   Future<void> guardarNumeroDeSeguindo(int seguindo) async {
+   prefs.setInt(LocalStorageKeys.countSeguidores, seguindo);
+  }
+
   @override
   Widget build(BuildContext context) {
     final usuarioVM = ref.watch(UsuarioVmProvider(id: id));
@@ -60,11 +65,12 @@ class _ModalPageState extends ConsumerState<ModalPage> {
           data: (data) {
             final UsuarioState(:usuario) = data;
             guardarGeneroFavorito(usuario['generoFavorito'] ?? "");
+            guardarNumeroDeSeguindo(usuario['seguindoCount'] ?? 0);
             List<Widget> pages = <Widget>[
               const HomePage(),
               MusicasPage(),
               PesquisaMusicaPage(),
-              MeuPerfilPage(id:usuario["id"].toString(),nome:usuario['username'], email: usuario['email'], foto: usuario['fotoPerfil'], genero: usuario['generoFavorito'] ?? "", seguidores:  usuario['seguidoresCount'], seguindo: usuario['seguindoCount'])
+              MeuPerfilPage()
             ];
             Widget _home() {
               return pages.elementAt(_selectedIndex);

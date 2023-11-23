@@ -5,6 +5,8 @@ sealed class LocalStorageKeys {
   static const idUsuario = 'ID_USUARIO';
   static const usernameUsuario = 'USERNAME_USUARIO';
   static const generoFavorito = 'GENERO_FAVORITO';
+  static const countSeguidores = 'COUNT_SEGUINDO';
+  
 }
 
 sealed class Environment {

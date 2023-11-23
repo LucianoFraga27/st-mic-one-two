@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
+import 'package:mic_check_one_two/domain/repository/seguindo/riverpod/seguindo_vm.dart';
 import 'package:mic_check_one_two/environment.dart';
 import 'package:mic_check_one_two/view/widgets/card_music.dart';
 import 'package:mic_check_one_two/view/widgets/destaque_widget.dart';
@@ -41,6 +42,7 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
   @override
   Widget build(BuildContext context) {
     final musicaVM = ref.watch(MusicaViewModelProvider());
+    final seguindoVM = ref.watch(SeguindoViewModelProvider());
     return Column(
       children: [
         Container(
@@ -48,21 +50,21 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // GestureDetector(
-              //   onTap: () {
-              //     _pageController.animateToPage(0,
-              //         duration: Duration(milliseconds: 300),
-              //         curve: Curves.ease);
-              //   },
-              //   child: Text(
-              //     'Seguindo',
-              //     style: TextStyle(
-              //       fontSize: 18,
-              //       color: _currentPage == 0 ? Colors.black : Colors.grey,
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(width: 20),
+              GestureDetector(
+                onTap: () {
+                  _pageController.animateToPage(0,
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.ease);
+                },
+                child: Text(
+                  'Seguindo',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: _currentPage == 0 ? const Color.fromARGB(255, 205, 83, 227) : Colors.grey,
+                  ),
+                ),
+              ),
+              SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
                   _pageController.animateToPage(1,
@@ -73,7 +75,7 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
                   'Para Você',
                   style: TextStyle(
                     fontSize: 18,
-                    color: _currentPage == 1 ? Colors.black : Colors.grey,
+                    color: _currentPage == 1 ? const Color.fromARGB(255, 205, 83, 227) : Colors.grey,
                   ),
                 ),
               ),
@@ -89,7 +91,14 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
               });
             },
             children: [
-             // SingleChildScrollView(child: _seguindo()),
+             SingleChildScrollView(child: seguindoVM.when(data: (data) {
+                 final SeguindoViewState(:musicas) = data;
+                 if(musicas.isEmpty) {
+                  return _vazio();
+                 }
+                 return _paravoce(musicas);
+                 
+                 }, error: (error, stackTrace) => Text("Ocorreu um erro"), loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)) )))),
               SingleChildScrollView(child: musicaVM.when(data: (data) {
                  final MusicaViewState(:musicasDoGenero) = data;
                  return _paravoce(musicasDoGenero);
@@ -101,13 +110,22 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
     );
   }
 
+  _vazio() {
+    return Container(
+      height: MediaQuery.of(context).size.height / 1.8,
+      // color:Colors.black.withOpacity(0.1),
+      child: Center(
+        child: Text( 'Siga alguns artistas para começar o show!', style: TextStyle(fontSize: 18, color:const Color.fromARGB(255, 200, 87, 220)),),
+      ),
+    );
+  }
   _paravoce(musicasDoGenero) {
     List<dynamic> musicas = musicasDoGenero;
     return Column(
       children: [
         const SizedBox(height: 20),
         ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(height: 20),
+          separatorBuilder: (context, index) => const SizedBox(height: 0),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: musicas.length, // O número de cartões de música que você deseja criar
@@ -133,7 +151,7 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
       children: [
         const SizedBox(height: 20),
         ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(height: 20),
+          separatorBuilder: (context, index) => const SizedBox(height: 0),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: 10,

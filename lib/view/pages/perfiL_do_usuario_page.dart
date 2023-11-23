@@ -7,7 +7,9 @@ import 'package:mic_check_one_two/domain/repository/seguir/riverpod/seguir_vm.da
 import 'package:mic_check_one_two/domain/repository/seguir/seguir_usuario_repository_temp.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/vm/login_state.dart';
 import 'package:mic_check_one_two/environment.dart';
+import 'package:mic_check_one_two/view/pages/lista_seguidores_page.dart';
 import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
+import 'package:mic_check_one_two/view/widgets/minha_faixa_widget_usuario_de_fora.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,11 +36,15 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
   int click = 0;
   String meu_id = "1";
   late SharedPreferences sp;
-
+  
   init() async {
     sp = await SharedPreferences.getInstance();
     meu_id = sp.getString(LocalStorageKeys.idUsuario).toString();
     seguirUsuarioRepositoryTemp = SeguirUsuarioRepositoryTemp();
+  }
+
+  Future<void> setarNovoValorSeguindo(int seguindo) async {
+   sp.setInt(LocalStorageKeys.countSeguidores, seguindo);
   }
 
   @override
@@ -161,10 +167,17 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
         SizedBox(width: 20),
         Column(
           children: [
-            Text(
-              'Seguidores',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ListaSeguidoresPage(id:id.toString()),)
+                );
+              },
+              child: Text(
+                'Seguidores',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Text(
@@ -211,8 +224,10 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
           seguirUsuarioRepositoryTemp.seguir(id.toString());
           if (seguindo_usuario == true) {
             seguidoresDoUsuario += 1;
+            setarNovoValorSeguindo(seguidoresDoUsuario);
           } else {
             seguidoresDoUsuario -= 1;
+            setarNovoValorSeguindo(seguidoresDoUsuario);
           }
         });
       },
@@ -255,7 +270,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
 
   Widget _minhasFaixas(id) {
     // Lógica para exibir o gráfico aqui
-    return MinhaFaixaWidget(
+    return MinhaFaixaWidgetUsuarioDeFora(
       id: id.toString(),
     );
   }

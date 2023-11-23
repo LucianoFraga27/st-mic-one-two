@@ -1,124 +1,148 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/vm/listar_curtidas_vm.dart';
+import 'package:mic_check_one_two/domain/repository/representacaoUsuario/representacaousuario_vm.dart';
+import 'package:mic_check_one_two/domain/repository/usuario/riverpod/vm/login_state.dart';
+import 'package:mic_check_one_two/environment.dart';
 import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/paravoce_widget.dart';
 
 class MeuPerfilPage extends ConsumerStatefulWidget {
-  final String nome;
-  final String email;
-  final String foto;
-  final String genero;
-  final int seguidores;
-  final int seguindo;
-  final String id;
+  
   MeuPerfilPage({
-    required this.nome,
-    required this.email,
-    required this.foto,
-    required this.genero,
-    required this.seguidores,
-    required this.seguindo,
-    required this.id,
+    
     Key? key,
   }) : super(key: key);
 
   @override
- ConsumerState<MeuPerfilPage>  createState() => _MeuPerfilPageState(id: id,email: email, foto: foto, nome: nome, genero: genero, seguidores: seguidores, seguindo: seguindo);
+ ConsumerState<MeuPerfilPage>  createState() => _MeuPerfilPageState();
 }
 
 class _MeuPerfilPageState extends ConsumerState<MeuPerfilPage> {
   
-_MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.genero, this.seguidores, this.seguindo});
 
-  String id;
-  String? nome;
-  String? email;
-  String? foto;
-  String? genero;
-  int? seguidores;
-  int? seguindo;
+    late SharedPreferences prefs;
+  var id;
+  int seguidores = 0;
+  @override
+  void initState() {
+    super.initState();
+    _carregarSharedPreferences();
+   }
+
+  Future<void> _carregarSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+    id = prefs.getString(LocalStorageKeys.idUsuario);
+    print("id do usuario: $id");
+    seguidores = prefs.getInt(LocalStorageKeys.countSeguidores) ?? 0;
+  });
+  }
   
   bool exibirGrafico = false;
   
+   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _carregarSharedPreferences();
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(nome.toString());
+    Duration(seconds: 2);
+    final usuarioVM = ref.watch(RepresentacaousuarioVmProvider());
     return SingleChildScrollView(
       child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 20),
-            CircleAvatar(
-              radius: 80,
-              backgroundImage: NetworkImage(
-                  foto.toString()),
-            ),
-            SizedBox(height: 20),
-            Text(
-              nome.toString(),
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              email.toString(),
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            
-            SizedBox(height: 20),
-            _infos(),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(width: 20),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        exibirGrafico = false;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      // Cor de fundo transparente
-                      onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
-                    ),
-                    child: Text('Minhas Faixas'),
-                  ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        exibirGrafico = true;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      // Cor de fundo transparente
-                      onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
-                    ),
-                    child: Text('Curtidas'),
-                  ),
-                ),
-                SizedBox(width: 20),
-              ],
-            ),
-            SizedBox(height: 20),
-            exibirGrafico ? _exibirGrafico() : _minhasFaixas(id),
-          ],
-        ),
-      ),
+        child:Builder(builder: (context)  {
+         
+
+          return usuarioVM.when(data: (data) { 
+          
+          final RepresentacaousuarioViewState(:usuario) = data;
+          log("000000000000000000000000000");
+          log(usuario.toString());
+           log("000000000000000000000000000");
+          return column(usuario['username'], usuario['fotoPerfil'], usuario['email'], usuario['seguidoresCount'], usuario['seguindoCount'] ); }, error: (e,s) => Container(), loading: () => Container());
+      
+        },)),
     );
   }
 
-  Row _infos() {
+  Column column(nome, foto, email, seguidores, seguindo) {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 20),
+          CircleAvatar(
+            radius: 80,
+            backgroundImage: NetworkImage(
+                foto.toString()),
+          ),
+          SizedBox(height: 20),
+          Text(
+            nome.toString(),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            email.toString(),
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          
+          SizedBox(height: 20),
+          _infos(seguidores, seguindo),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 20),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      exibirGrafico = false;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    // Cor de fundo transparente
+                    onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
+                  ),
+                  child: Text('Minhas Faixas'),
+                ),
+              ),
+              SizedBox(width: 20),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      exibirGrafico = true;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    // Cor de fundo transparente
+                    onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
+                  ),
+                  child: Text('Curtidas'),
+                ),
+              ),
+              SizedBox(width: 20),
+            ],
+          ),
+          SizedBox(height: 20),
+          exibirGrafico ? _exibirGrafico() : _minhasFaixas(id),
+        ],
+      );
+  }
+
+  Row _infos(seguidores, seguindo) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -194,9 +218,15 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
                                 capa: musicas[i]['capa'],
                                 audio: musicas[i]['audio'],
                                 autorId: musicas[i]['autor']['id'].toString(),
-                                musicaId: musicas[i]['id'].toString())
-                          
+                                musicaId: musicas[i]['id'].toString()),
+                                
+                                
+                                SizedBox(height: 20,),
+                                
+                       
+                        
                         ],
+                        
                       );
                     },
                     error: (error, stackTrace) {
@@ -208,6 +238,11 @@ _MeuPerfilPageState({ required this.id, this.nome, this.email, this.foto, this.g
 
   Widget _minhasFaixas(id) {
     // Lógica para exibir o gráfico aqui
-    return MinhaFaixaWidget(id: id,);
+    return Column(
+      children: [
+        MinhaFaixaWidget(id: id,),
+        SizedBox(height: 20,),
+      ],
+    );
   }
 }

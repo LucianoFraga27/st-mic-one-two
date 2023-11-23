@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/minhas_faixas_widget.dart';
+import 'package:mic_check_one_two/view/widgets/minhas_faixas_widget_usuario_de_fora.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 
-class MinhaFaixaWidget extends ConsumerWidget {
-  MinhaFaixaWidget({super.key, required this.id});
+class MinhaFaixaWidgetUsuarioDeFora extends ConsumerWidget {
+  MinhaFaixaWidgetUsuarioDeFora({super.key, required this.id});
   String id;
   ThemeColors themeColors = ThemeColors();
   @override
@@ -30,7 +31,7 @@ class MinhaFaixaWidget extends ConsumerWidget {
             itemCount: musicas
                 .length, // O número de cartões de música que você deseja criar
             itemBuilder: (context, index) {
-              return MinhasFaixasWidget(
+              return MinhasFaixasWidgetUsuarioDeFora(
                 autor: musicas[index]["autor"],
                 genero: musicas[index]["genero"],
                 id: musicas[index]["id"].toString(),

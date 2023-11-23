@@ -7,6 +7,8 @@ import 'package:mic_check_one_two/domain/repository/login/login_repository.dart'
 import 'package:mic_check_one_two/domain/repository/login/login_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository_impl.dart';
+import 'package:mic_check_one_two/domain/repository/representacaoUsuario/representacao_usuario_repository.dart';
+import 'package:mic_check_one_two/domain/repository/seguindo/riverpod/seguindo_repository.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/usuario_repo.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/usuario_repo_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -45,3 +47,13 @@ CurtidaOuNaoRepository curtidaOuNaoRepository(CurtidaOuNaoRepositoryRef ref) =>
 @Riverpod(keepAlive: true)
 SeguirRepository seguirRepositoryRepository(SeguirRepositoryRepositoryRef ref) =>
     SeguirRepositoryImpl(restClient: ref.read(restClientProvider));
+
+@Riverpod(keepAlive: true)
+SeguindoRepository seguindoRepository(SeguindoRepositoryRef ref) =>
+    SeguindoRepositoryImpl(restClient: ref.read(restClientProvider));
+
+@Riverpod(keepAlive: true)
+RepresentacaousuarioRepository representacaousuarioRepository(RepresentacaousuarioRepositoryRef ref) =>
+    RepresentacaousuarioRepositoryImpl(restClient: ref.read(restClientProvider));
+
+

@@ -118,5 +118,39 @@ final seguirRepositoryRepositoryProvider = Provider<SeguirRepository>.internal(
 );
 
 typedef SeguirRepositoryRepositoryRef = ProviderRef<SeguirRepository>;
+String _$seguindoRepositoryHash() =>
+    r'258ed8ac5fd75e2ee6b14fa78d9ae6a2f2c5a734';
+
+/// See also [seguindoRepository].
+@ProviderFor(seguindoRepository)
+final seguindoRepositoryProvider = Provider<SeguindoRepository>.internal(
+  seguindoRepository,
+  name: r'seguindoRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$seguindoRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SeguindoRepositoryRef = ProviderRef<SeguindoRepository>;
+String _$representacaousuarioRepositoryHash() =>
+    r'd7475911ef8b764274b3a678a15b6776e9a807a1';
+
+/// See also [representacaousuarioRepository].
+@ProviderFor(representacaousuarioRepository)
+final representacaousuarioRepositoryProvider =
+    Provider<RepresentacaousuarioRepository>.internal(
+  representacaousuarioRepository,
+  name: r'representacaousuarioRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$representacaousuarioRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef RepresentacaousuarioRepositoryRef
+    = ProviderRef<RepresentacaousuarioRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -19,6 +19,7 @@ class _PesquisaMusicaPageState extends ConsumerState<PesquisaMusicaPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 10,),
             _buildSearchField(),
             SizedBox(height: 16),
           if(pesquisar == true ) musicaVM.when(data: (data) {
@@ -63,7 +64,7 @@ class _PesquisaMusicaPageState extends ConsumerState<PesquisaMusicaPage> {
       children: [
         const SizedBox(height: 20),
         ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(height: 20),
+          separatorBuilder: (context, index) => const SizedBox(height: 0),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: musicas.length, // O número de cartões de música que você deseja criar

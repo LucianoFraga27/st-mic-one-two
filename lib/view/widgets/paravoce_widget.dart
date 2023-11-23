@@ -125,7 +125,8 @@ class ParaVoceWidget extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+          SizedBox(height: 20,),
         ],
       ),
     );

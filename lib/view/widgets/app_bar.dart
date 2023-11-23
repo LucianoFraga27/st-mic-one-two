@@ -11,6 +11,7 @@ AppBar customAppBar(BuildContext context) {
   return AppBar(
     title: Image.asset("assets/onetwo-icone-semfundo.png", width: 45,),
     // const Text("OneTwo", style: TextStyle(fontWeight: FontWeight.w600, color: Color.fromARGB(255, 123, 70, 187),)),
+    // leading: IconButton(onPressed: () {}, icon: Icon(Icons.)),
     actions: [
       // _action(
       //   () {
