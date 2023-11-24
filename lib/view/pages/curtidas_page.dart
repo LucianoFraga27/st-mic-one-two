@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/vm/listar_curtidas_vm.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
 import 'package:mic_check_one_two/environment.dart';
+import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/curtidas_widget.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,10 +42,17 @@ class _CurtidasPageState extends ConsumerState<CurtidasPage> {
         idUsuario: int.tryParse(id.toString())));
     print("id do usuario: $id");
     return Scaffold(
-      appBar: customAppBar(context),
+      
+      appBar: AppBar(
+        title: Text("Curtidas"),
+      ),
       body: SingleChildScrollView(
         child: Container(
+            // height: MediaQuery.of(context).size.height * 1.2,
             width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              // gradient: ThemeColors().branco
+            ),
             child: Column(
               children: [
                 SizedBox(
@@ -56,7 +64,7 @@ class _CurtidasPageState extends ConsumerState<CurtidasPage> {
                       print(musicas);
                       return Column(
                         children: [
-                          Text("Minhas Curtidas", style: TextStyle(fontSize: 20),),
+                          
                           for (int i = 0; i < musicas.length; i++)
                             ParaVoceWidget(
                                 id: musicas[i][id].toString(),

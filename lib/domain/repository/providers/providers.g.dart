@@ -152,5 +152,22 @@ final representacaousuarioRepositoryProvider =
 
 typedef RepresentacaousuarioRepositoryRef
     = ProviderRef<RepresentacaousuarioRepository>;
+String _$listarSeguidoresRepositoryHash() =>
+    r'2b66203c4e52a9a362f5d079e9a133e791a0cf63';
+
+/// See also [listarSeguidoresRepository].
+@ProviderFor(listarSeguidoresRepository)
+final listarSeguidoresRepositoryProvider =
+    Provider<ListarSeguidoresRepository>.internal(
+  listarSeguidoresRepository,
+  name: r'listarSeguidoresRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$listarSeguidoresRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ListarSeguidoresRepositoryRef = ProviderRef<ListarSeguidoresRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

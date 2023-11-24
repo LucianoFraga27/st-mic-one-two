@@ -3,6 +3,7 @@ import 'package:mic_check_one_two/domain/repository/curtida/musica_curtidaounao/
 import 'package:mic_check_one_two/domain/repository/curtida/musica_curtidaounao/curtida_ou_nao_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/listar_musicas_curtidas_repository.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/listar_musicas_curtidas_repository_impl.dart';
+import 'package:mic_check_one_two/domain/repository/listarSeguidores/listar_seguidores_repository.dart';
 import 'package:mic_check_one_two/domain/repository/login/login_repository.dart';
 import 'package:mic_check_one_two/domain/repository/login/login_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository.dart';
@@ -55,5 +56,9 @@ SeguindoRepository seguindoRepository(SeguindoRepositoryRef ref) =>
 @Riverpod(keepAlive: true)
 RepresentacaousuarioRepository representacaousuarioRepository(RepresentacaousuarioRepositoryRef ref) =>
     RepresentacaousuarioRepositoryImpl(restClient: ref.read(restClientProvider));
+
+@Riverpod(keepAlive: true)
+ListarSeguidoresRepository listarSeguidoresRepository(ListarSeguidoresRepositoryRef ref) =>
+    ListarSeguidoresRepositoryImpl(restClient: ref.read(restClientProvider));
 
 
