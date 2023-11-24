@@ -105,20 +105,20 @@ class _MinhasFaixasWidgetUsuarioDeForaState extends State<MinhasFaixasWidgetUsua
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.favorite,
-                                        size: 14, color: Colors.white),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(widget.curtidas,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: const Color.fromARGB(
-                                                255, 255, 255, 255))),
-                                  ],
-                                )
+                                // Row(
+                                //   children: [
+                                //     Icon(Icons.favorite,
+                                //         size: 14, color: Colors.white),
+                                //     SizedBox(
+                                //       width: 5,
+                                //     ),
+                                //     Text(widget.curtidas,
+                                //         style: TextStyle(
+                                //             fontSize: 14,
+                                //             color: const Color.fromARGB(
+                                //                 255, 255, 255, 255))),
+                                //   ],
+                                // )
                               ],
                             ),
                           ),

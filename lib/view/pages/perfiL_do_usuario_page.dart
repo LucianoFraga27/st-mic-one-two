@@ -102,7 +102,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
               fontSize: 18,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           _infos(seguidores, seguindo, id.toString()),
           SizedBox(height: 20),
           Row(
@@ -117,7 +117,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    // Cor de fundo transparente
+                   backgroundColor: exibirGrafico ? Colors.white54  : Color.fromARGB(255, 228, 205, 255),
                     onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                   ),
                   child: Text('Faixas'),
@@ -132,6 +132,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: exibirGrafico ? Color.fromARGB(255, 209, 171, 255) : Colors.white54,
                     onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                   ),
                   child: Text('Curtidas'),
@@ -147,12 +148,11 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
     );
   }
 
-  Row _infos(seguidores, seguindo, id) {
+   _infos(seguidores, seguindo, id) {
     log("ID DO USUARIO $id");
     final seguirVM =
         ref.watch(SeguirOuNaoViewModelProvider(idMusica: int.tryParse(id)));
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
         if (meu_id != id.toString())
           seguirVM.when(
@@ -164,44 +164,50 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
             error: (error, stackTrace) => Container(),
             loading: () => Container(),
           ),
-        SizedBox(width: 20),
-        Column(
+          SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ListaSeguidoresPage(id:id.toString()),)
-                );
-              },
-              child: Text(
-                'Seguidores',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+            SizedBox(width: 20),
+            Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ListaSeguidoresPage(id:id.toString()),)
+                    );
+                  },
+                  child: Text(
+                    'Seguidores',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+                Text(
+                  seguidoresDoUsuario.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              seguidoresDoUsuario.toString(),
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(width: 20),
-        Column(
-          children: [
-            Text(
-              'Seguindo',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '$seguindo'.toString(),
-              style: TextStyle(
-                fontSize: 18,
-              ),
+            SizedBox(width: 20),
+            Column(
+              children: [
+                Text(
+                  'Seguindo',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '$seguindo'.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -233,6 +239,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
       },
       style: ElevatedButton.styleFrom(
         // Cor de fundo transparente
+        backgroundColor: seguindo_usuario ? Color.fromARGB(255, 255, 171, 247) : Colors.white54,
         onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
       ),
       child: Text(seguindo_usuario ? 'Seguindo' : 'Seguir'),

@@ -112,7 +112,7 @@ class _MeuPerfilPageState extends ConsumerState<MeuPerfilPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    // Cor de fundo transparente
+                     backgroundColor: exibirGrafico ?  Colors.white54 : Color.fromARGB(255, 209, 171, 255),
                     onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                   ),
                   child: Text('Minhas Faixas'),
@@ -127,7 +127,7 @@ class _MeuPerfilPageState extends ConsumerState<MeuPerfilPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    // Cor de fundo transparente
+                     backgroundColor: exibirGrafico ? Color.fromARGB(255, 209, 171, 255) : Colors.white54,
                     onPrimary: Color.fromARGB(197, 0, 0, 0), // Cor do texto
                   ),
                   child: Text('Curtidas'),
