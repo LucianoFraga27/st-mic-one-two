@@ -6,6 +6,7 @@ import 'package:mic_check_one_two/domain/repository/curtida/riverpod/vm/listar_c
 import 'package:mic_check_one_two/domain/repository/representacaoUsuario/representacaousuario_vm.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/vm/login_state.dart';
 import 'package:mic_check_one_two/environment.dart';
+import 'package:mic_check_one_two/view/pages/lista_seguidores_page.dart';
 import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -98,7 +99,7 @@ class _MeuPerfilPageState extends ConsumerState<MeuPerfilPage> {
           ),
           
           SizedBox(height: 20),
-          _infos(seguidores, seguindo),
+          _infos(seguidores, seguindo,nome),
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -142,61 +143,67 @@ class _MeuPerfilPageState extends ConsumerState<MeuPerfilPage> {
       );
   }
 
-  Row _infos(seguidores, seguindo) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Column(
-        //   children: [
-        //     Text(
-        //       'Faixas',
-        //       style: TextStyle(
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //     Text(
-        //       '13',
-        //       style: TextStyle(
-        //         fontSize: 18,
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        SizedBox(width: 20),
-        Column(
-          children: [
-            Text(
-              'Seguidores',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+    _infos(seguidores, seguindo,nome) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: 
+        (context) => ListaSeguidoresPage(id: id, usuario: nome),));
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Column(
+          //   children: [
+          //     Text(
+          //       'Faixas',
+          //       style: TextStyle(
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //     Text(
+          //       '13',
+          //       style: TextStyle(
+          //         fontSize: 18,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          SizedBox(width: 20),
+          Column(
+            children: [
+              Text(
+                'Seguidores',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              seguidores.toString(),
-              style: TextStyle(
-                fontSize: 18,
+              Text(
+                seguidores.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(width: 20),
-        Column(
-          children: [
-            Text(
-              'Seguindo',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+            ],
+          ),
+          SizedBox(width: 20),
+          Column(
+            children: [
+              Text(
+                'Seguindo',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              seguindo.toString(),
-              style: TextStyle(
-                fontSize: 18,
+              Text(
+                seguindo.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 

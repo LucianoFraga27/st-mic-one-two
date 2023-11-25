@@ -3,28 +3,28 @@ import 'package:mic_check_one_two/api/rest_client.dart';
 import 'package:mic_check_one_two/domain/repository/providers/providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract interface class ListarSeguidoresRepository {
-  Future<List<dynamic>> listarSeguidores (String idUsuario);
+abstract interface class ListarSeguindoRepository {
+  Future<List<dynamic>> listarSeguindo (String idUsuario);
 
 }
 
-class ListarSeguidoresRepositoryImpl implements ListarSeguidoresRepository {
+class ListarSeguindoRepositoryImpl implements ListarSeguindoRepository {
   
    final RestClient restClient;
-  ListarSeguidoresRepositoryImpl({
+  ListarSeguindoRepositoryImpl({
     required this.restClient,
   });
 
   
   @override
-  Future<List> listarSeguidores(String idUsuario) async {
+  Future<List> listarSeguindo(String idUsuario) async {
    try {
       final sp = await SharedPreferences.getInstance();
-      final Response(:data) = await restClient.auth.get('/v1/usuario/$idUsuario/seguidores');
+      final Response(:data) = await restClient.auth.get('/v1/usuario/$idUsuario/seguindo');
       print(data);
       return data;
     } on DioException catch (e) {
-       throw Exception('Falha ao buscar seguidores do usuario com id:$idUsuario');
+       throw Exception('Falha ao buscar seguindo do usuario com id:$idUsuario');
     }
   
   }

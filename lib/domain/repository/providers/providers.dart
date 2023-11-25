@@ -4,6 +4,7 @@ import 'package:mic_check_one_two/domain/repository/curtida/musica_curtidaounao/
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/listar_musicas_curtidas_repository.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/riverpod/listar_musicas_curtidas_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/listarSeguidores/listar_seguidores_repository.dart';
+import 'package:mic_check_one_two/domain/repository/listarSeguindo/listarseguindo_repository.dart';
 import 'package:mic_check_one_two/domain/repository/login/login_repository.dart';
 import 'package:mic_check_one_two/domain/repository/login/login_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository.dart';
@@ -61,4 +62,6 @@ RepresentacaousuarioRepository representacaousuarioRepository(Representacaousuar
 ListarSeguidoresRepository listarSeguidoresRepository(ListarSeguidoresRepositoryRef ref) =>
     ListarSeguidoresRepositoryImpl(restClient: ref.read(restClientProvider));
 
-
+@Riverpod(keepAlive: true)
+ListarSeguindoRepository listarSeguindoRepository(ListarSeguindoRepositoryRef ref) =>
+    ListarSeguindoRepositoryImpl(restClient: ref.read(restClientProvider));

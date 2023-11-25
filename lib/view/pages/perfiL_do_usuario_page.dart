@@ -103,7 +103,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
             ),
           ),
           SizedBox(height: 10),
-          _infos(seguidores, seguindo, id.toString()),
+          _infos(seguidores, seguindo, id.toString(), nome),
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +148,7 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
     );
   }
 
-   _infos(seguidores, seguindo, id) {
+   _infos(seguidores, seguindo, id,nome) {
     log("ID DO USUARIO $id");
     final seguirVM =
         ref.watch(SeguirOuNaoViewModelProvider(idMusica: int.tryParse(id)));
@@ -165,51 +165,51 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
             loading: () => Container(),
           ),
           SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(width: 20),
-            Column(
-              children: [
-                InkWell(
-                  onTap: () {
+        InkWell(
+           onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ListaSeguidoresPage(id:id.toString()),)
+                      MaterialPageRoute(builder: (context) => ListaSeguidoresPage(id:id.toString(),usuario: nome),)
                     );
                   },
-                  child: Text(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 20),
+              Column(
+                children: [
+                  Text(
                     'Seguidores',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                Text(
-                  seguidoresDoUsuario.toString(),
-                  style: TextStyle(
-                    fontSize: 18,
+                  Text(
+                    seguidoresDoUsuario.toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(width: 20),
-            Column(
-              children: [
-                Text(
-                  'Seguindo',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(width: 20),
+              Column(
+                children: [
+                  Text(
+                    'Seguindo',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  '$seguindo'.toString(),
-                  style: TextStyle(
-                    fontSize: 18,
+                  Text(
+                    '$seguindo'.toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );
