@@ -15,7 +15,6 @@ import '../widgets/paravoce_widget.dart';
 class MeuPerfilPage extends ConsumerStatefulWidget {
   
   MeuPerfilPage({
-    
     Key? key,
   }) : super(key: key);
 

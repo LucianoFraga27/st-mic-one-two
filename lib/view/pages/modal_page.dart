@@ -78,7 +78,7 @@ class _ModalPageState extends ConsumerState<ModalPage> {
 
             return _home();
           },
-          loading: () => Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255))),
+          loading: () => const Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255))),
           error: (e, s) => Container()),
       bottomNavigationBar: _customButtonNavigationBar(),
      );
