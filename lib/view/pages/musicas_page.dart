@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
+import 'package:mic_check_one_two/domain/repository/pravoce/pravoce_vm.dart';
 import 'package:mic_check_one_two/domain/repository/seguindo/riverpod/seguindo_vm.dart';
 import 'package:mic_check_one_two/environment.dart';
-import 'package:mic_check_one_two/view/widgets/card_music.dart';
-import 'package:mic_check_one_two/view/widgets/destaque_widget.dart';
-import 'package:mic_check_one_two/view/widgets/minha_faixa_widget.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 import 'package:mic_check_one_two/view/widgets/seguindo_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,7 +38,7 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
 
   @override
   Widget build(BuildContext context) {
-    final musicaVM = ref.watch(MusicaViewModelProvider());
+    final pravoceVM = ref.watch(pravoceViewModelProvider);
     final seguindoVM = ref.watch(SeguindoViewModelProvider());
     return Column(
       children: [
@@ -99,9 +96,9 @@ class _MusicasPageState extends ConsumerState<MusicasPage> {
                  return _paravoce(musicas);
                  
                  }, error: (error, stackTrace) => Text("Ocorreu um erro"), loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)) )))),
-              SingleChildScrollView(child: musicaVM.when(data: (data) {
-                 final MusicaViewState(:musicasDoGenero) = data;
-                 return _paravoce(musicasDoGenero);
+              SingleChildScrollView(child: pravoceVM.when(data: (data) {
+                 final PravoceViewState(:musicas) = data;
+                 return _paravoce(musicas);
                  }, error: (error, stackTrace) => Text("Ocorreu um erro"), loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)) )))),
             ],
           ),
