@@ -72,7 +72,9 @@ class _MeuPerfilPageState extends ConsumerState<PerfilDoUsuarioPage> {
               usuario['id']);
         },
         error: (error, stackTrace) => Container(),
-        loading: () => CircularProgressIndicator(),
+        loading: () => Container(
+          height: MediaQuery.of(context).size.height /1.3,
+          child: Center(child: CircularProgressIndicator())),
       )),
     );
   }

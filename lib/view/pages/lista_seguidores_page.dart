@@ -54,7 +54,9 @@ class ListaSeguidoresPage extends ConsumerWidget {
               error: (error, stackTrace) {
                 return Container();
               },
-              loading: () => const CircularProgressIndicator(),
+              loading: () => Container(
+                height: MediaQuery.of(context).size.height / 1.5,
+                child: Center(child: CircularProgressIndicator())),
             ),
 
             listarSeguidoresVM.when(
