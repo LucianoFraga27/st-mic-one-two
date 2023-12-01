@@ -1,15 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/musica_curtidaounao/curtida_ou_nao_vm.dart';
 import 'package:mic_check_one_two/domain/repository/curtida/musica_curtidaounao/curtir_repository.dart';
-import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
+import 'package:mic_check_one_two/domain/repository/tops/top_vm.dart';
 import 'package:mic_check_one_two/view/pages/perfiL_do_usuario_page.dart';
 import 'package:mic_check_one_two/view/theme.dart';
-import 'package:mic_check_one_two/view/widgets/dialog_perfil_famoso.dart';
-import 'package:mic_check_one_two/view/widgets/dialog_perfil_meu.dart';
 import 'package:mic_check_one_two/view/widgets/dialog_play_music.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,12 +41,14 @@ class _DestaqueWidgetState extends ConsumerState<DestaqueWidget> {
   @override
   Widget build(BuildContext context) {
     
-    final musicaVM = ref.watch(MusicaViewModelProvider());
+    final musicaVM = ref.watch(topViewModelProvider);
+   
+    ;
 
     return musicaVM.when(
       data: (data) {
-        final MusicaViewState(:musicasTop) = data;
-        return _contain(context, musicasTop);
+        final TopViewState(:musicas) = data;
+        return _contain(context, musicas);
       },
       error: (error, stackTrace) {
         return Container();

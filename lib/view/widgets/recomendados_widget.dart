@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
+import 'package:mic_check_one_two/domain/repository/tops/top_vm.dart';
 import 'package:mic_check_one_two/view/theme.dart';
 import 'package:mic_check_one_two/view/widgets/dialog_play_music.dart';
 
@@ -19,11 +19,11 @@ class _RecomendadosWidgetState extends ConsumerState<RecomendadosWidget> {
   @override
   Widget build(BuildContext context) {
 
-    final musicaVM = ref.watch(MusicaViewModelProvider());
+    final musicaVM = ref.watch(topViewModelProvider);
     
     return musicaVM.when(data: (data) {
-      final MusicaViewState(:musicasTop) = data;
-      return _contain(context, musicasTop);
+      final TopViewState(:musicas) = data;
+      return _contain(context, musicas);
     }, error: (error, stackTrace) {
       
       return Container();
