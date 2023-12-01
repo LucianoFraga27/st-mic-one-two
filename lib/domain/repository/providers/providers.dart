@@ -11,6 +11,7 @@ import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_river
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/representacaoUsuario/representacao_usuario_repository.dart';
 import 'package:mic_check_one_two/domain/repository/seguindo/riverpod/seguindo_repository.dart';
+import 'package:mic_check_one_two/domain/repository/tops/top_repository.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/usuario_repo.dart';
 import 'package:mic_check_one_two/domain/repository/usuario/riverpod/usuario_repo_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -65,3 +66,8 @@ ListarSeguidoresRepository listarSeguidoresRepository(ListarSeguidoresRepository
 @Riverpod(keepAlive: true)
 ListarSeguindoRepository listarSeguindoRepository(ListarSeguindoRepositoryRef ref) =>
     ListarSeguindoRepositoryImpl(restClient: ref.read(restClientProvider));
+
+@Riverpod(keepAlive: true)
+TopRepository topRepository(TopRepositoryRef ref) =>
+    TopRepositoryImpl(restClient: ref.read(restClientProvider));
+
