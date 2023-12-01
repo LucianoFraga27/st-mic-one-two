@@ -6,7 +6,7 @@ part of 'musica_vm.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$musicaViewModelHash() => r'175c7163b18a154eca11474239a6180bb503f0f6';
+String _$musicaViewModelHash() => r'1610edf142ac8c6ecf449674f140869fdb0407ff';
 
 /// Copied from Dart SDK
 class _SystemHash {
