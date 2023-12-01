@@ -9,6 +9,7 @@ import 'package:mic_check_one_two/domain/repository/login/login_repository.dart'
 import 'package:mic_check_one_two/domain/repository/login/login_repository_impl.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository.dart';
 import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_riverpod_repository_impl.dart';
+import 'package:mic_check_one_two/domain/repository/pesquisar/pesquisar_repository.dart';
 import 'package:mic_check_one_two/domain/repository/pravoce/paravoce_repository.dart';
 import 'package:mic_check_one_two/domain/repository/representacaoUsuario/representacao_usuario_repository.dart';
 import 'package:mic_check_one_two/domain/repository/seguindo/riverpod/seguindo_repository.dart';
@@ -76,3 +77,6 @@ TopRepository topRepository(TopRepositoryRef ref) =>
 PraVoceRepository praVoceRepository(PraVoceRepositoryRef ref) =>
     PraVoceRepositoryImpl(restClient: ref.read(restClientProvider));
 
+@Riverpod(keepAlive: true)
+PesquisaRepository pesquisaRepository(PesquisaRepositoryRef ref) =>
+PesquisaRepositoryImpl(restClient: ref.read(restClientProvider));

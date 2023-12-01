@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mic_check_one_two/domain/repository/musica/riverpod/musica_vm.dart';
+import 'package:mic_check_one_two/domain/repository/pesquisar/pesquisar_vm.dart';
 import 'package:mic_check_one_two/view/widgets/paravoce_widget.dart';
 
 class PesquisaMusicaPage extends ConsumerStatefulWidget {
@@ -13,7 +13,7 @@ class _PesquisaMusicaPageState extends ConsumerState<PesquisaMusicaPage> {
   bool pesquisar = false;
   @override
   Widget build(BuildContext context) {
-     final musicaVM = ref.watch(MusicaViewModelProvider(pesquisa: _searchController.text));
+     final musicaVM = ref.watch(PesquisarViewModelProvider(pesquisa: _searchController.text));
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -23,8 +23,8 @@ class _PesquisaMusicaPageState extends ConsumerState<PesquisaMusicaPage> {
             _buildSearchField(),
             SizedBox(height: 16),
           if(pesquisar == true ) musicaVM.when(data: (data) {
-                   final MusicaViewState(:musicasPesquisa) = data;
-                   return _paravoce(musicasPesquisa);
+                   final PesquisarViewState(:musicas) = data;
+                   return _paravoce(musicas);
                    }, error: (error, stackTrace) => Text("Ocorreu um erro"),
                     loading: () => Container(height: 500, child: Center(child: CircularProgressIndicator(color:Color.fromARGB(255, 182, 123, 255)) )))
           ],

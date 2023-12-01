@@ -216,5 +216,21 @@ final praVoceRepositoryProvider = Provider<PraVoceRepository>.internal(
 );
 
 typedef PraVoceRepositoryRef = ProviderRef<PraVoceRepository>;
+String _$pesquisaRepositoryHash() =>
+    r'85dcf6fd4f5384124c293f6fc38267a1bf4bfc38';
+
+/// See also [pesquisaRepository].
+@ProviderFor(pesquisaRepository)
+final pesquisaRepositoryProvider = Provider<PesquisaRepository>.internal(
+  pesquisaRepository,
+  name: r'pesquisaRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$pesquisaRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef PesquisaRepositoryRef = ProviderRef<PesquisaRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
